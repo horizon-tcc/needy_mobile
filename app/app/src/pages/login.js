@@ -151,7 +151,9 @@ class Login extends Component {
                                 transform: [{ translateY: this.buttonY }]
                             }}
                         >
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>ENTRAR</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ca2929' }}>
+                                JÁ SOU DOADOR
+                            </Text>
                         </Animated.View>
                     </TapGestureHandler>
 
@@ -167,7 +169,7 @@ class Login extends Component {
 
                         >
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                                CADASTRAR
+                                COMO POSSO DOAR?
                         </Text>
                         </Animated.View>
                     </TapGestureHandler>
@@ -230,9 +232,10 @@ const styles = StyleSheet.create({
 
     button: {
         backgroundColor: 'white',
-        height: 70,
+        height: 140,
+        marginBottom: 10,
         marginHorizontal: 20,
-        borderRadius: 35,
+        borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 5,
@@ -248,8 +251,9 @@ const styles = StyleSheet.create({
     },
 
     textInput: {
-        height: 50,
+        height: 100,
         borderRadius: 25,
+        marginBottom: 40,
         borderWidth: 0.5,
         marginHorizontal: 20,
         paddingLeft: 10,
@@ -258,15 +262,15 @@ const styles = StyleSheet.create({
     },
 
     closeButton: {
-        height: 40,
-        width: 40,
+        height: 90,
+        width: '90%',
         backgroundColor: "red",
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: "center",
         position: 'absolute',
-        top: 270,
-        left: width / 2 - 20,
+        top: 290,
+        left: width / 2 - 162,
         shadowOffset: { width: 2, height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.2,

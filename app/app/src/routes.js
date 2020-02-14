@@ -10,7 +10,7 @@ import Cadastro from './pages/cadastro';
 import Intro from './pages/intro';
 import Maps from './pages/maps';
 import Home from './pages/home';
-import Config from './pages/config';
+import Perfil from './pages/perfil';
 
 const bottomNavigator = createMaterialBottomTabNavigator(
     {
@@ -34,8 +34,8 @@ const bottomNavigator = createMaterialBottomTabNavigator(
         },
 
 
-        Config: {
-            screen: Config,
+        Perfil: {
+            screen: Perfil,
             navigationOptions: () => ({
                 tabBarIcon: ({ focused }) => (
                     <AntDesign name="setting" size={20} color={focused ? '#fff' : '#ddd'} />
