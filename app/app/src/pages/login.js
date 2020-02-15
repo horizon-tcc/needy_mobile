@@ -125,7 +125,8 @@ class Login extends Component {
                 style={{
                     flex: 1,
                     backgroundColor: 'white',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    
                 }}
             >
                 <Animated.View
@@ -136,13 +137,13 @@ class Login extends Component {
                 >
 
                     <Image
-                        source={require('../../assets/images/telaLogin/bg.png')}
+                        source={require('../../assets/images/telaLogin/bg2.png')}
                         style={{ flex: 1, height: null, width: null }}
 
                     />
 
                 </Animated.View>
-                <View style={{ height: height / 3, justifyContent: 'center' }}>
+                <View style={{ height: height / 1.7, justifyContent: 'flex-end' }}>
                     <TapGestureHandler onHandlerStateChange={this.onStateChange}>
                         <Animated.View
                             style={{
@@ -152,7 +153,7 @@ class Login extends Component {
                             }}
                         >
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#ca2929' }}>
-                                JÁ SOU DOADOR
+                                JÁ SOU DOADOR!
                             </Text>
                         </Animated.View>
                     </TapGestureHandler>
@@ -169,7 +170,7 @@ class Login extends Component {
 
                         >
                             <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-                                COMO POSSO DOAR?
+                                COMO DOAR?
                         </Text>
                         </Animated.View>
                     </TapGestureHandler>
@@ -194,6 +195,8 @@ class Login extends Component {
                             </Animated.View>
                         </TapGestureHandler>
 
+                        <Text style={styles.titulo}>ENTRAR</Text>
+
                         <TextInput
                             placeholder="E-mail"
                             style={styles.textInput}
@@ -209,7 +212,7 @@ class Login extends Component {
 
                         </TextInput>
                         <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Home')}>
-                            <Animated.View style={styles.button}>
+                            <Animated.View style={styles.buttonEntrar}>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }} >
                                     ENTRAR
                             </Text>
@@ -230,9 +233,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
+    titulo: {
+        bottom: 120,
+        left: width / 2 - 50,
+        color: "#ca2929",
+        fontWeight: 'bold',
+        fontSize: 30,
+    },
+
     button: {
         backgroundColor: 'white',
-        height: 140,
+        height: 70,
         marginBottom: 10,
         marginHorizontal: 20,
         borderRadius: 15,
@@ -250,27 +261,57 @@ const styles = StyleSheet.create({
 
     },
 
-    textInput: {
-        height: 100,
-        borderRadius: 25,
-        marginBottom: 40,
-        borderWidth: 0.5,
+
+    buttonEntrar: {
+        backgroundColor: 'white',
+        height: 50,
+        width: '35%',
+
+        marginBottom: 10,
         marginHorizontal: 20,
-        paddingLeft: 10,
+        borderRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        left: width / 2 - 80,
+    },
+
+    textInput: {
+        height: 60,
+        marginBottom: 15,
+
+        bottom: 70,
+
+        borderRadius: 25,
+        borderWidth: 0.5,
+        borderTopWidth: 0,
+        borderRightWidth: 0,
+        borderLeftWidth: 0,
+
+        marginHorizontal: 20,
+        paddingLeft: 20,
         marginVertical: 5,
         borderColor: 'rgba(0,0,0,0.2)'
     },
 
     closeButton: {
-        height: 90,
-        width: '90%',
+        height: 50,
+        width: '35%',
         backgroundColor: "red",
         borderRadius: 20,
         alignItems: 'center',
         justifyContent: "center",
         position: 'absolute',
-        top: 290,
-        left: width / 2 - 162,
+        top: 240,
+        left: width / 2 - 60,
         shadowOffset: { width: 2, height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.2,
