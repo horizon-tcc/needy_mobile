@@ -6,7 +6,7 @@ export default class Cadastro extends Component{
     render(){
         return(
             <View style={{flex:1, justifyContent: "center", alignItems: 'center'}}>
-                <Text>tela de cadastro</Text>
+                <Text>Home without content</Text>
             </View>
         )
     }

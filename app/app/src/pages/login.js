@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TextInput, ImageBackground } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const { width, height } = Dimensions.get('window');
 
 const {
@@ -121,10 +122,10 @@ class Login extends Component {
     }
     render() {
         return (
-            <View
+            <ImageBackground 
                 style={{
                     flex: 1,
-                    backgroundColor: 'white',
+                    backgroundColor: '#ca2929',
                     justifyContent: 'center',
                     
                 }}
@@ -159,7 +160,7 @@ class Login extends Component {
                     </TapGestureHandler>
 
 
-                    <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Cadastro')}>
+                    <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Intro')}>
                         <Animated.View
                             style={{
                                 ...styles.button,
@@ -175,52 +176,78 @@ class Login extends Component {
                         </Animated.View>
                     </TapGestureHandler>
 
+
+
+                                   
                     <Animated.View
                         style={{
                             zIndex: this.textInputZindex,
                             opacity: this.textInputOpacity,
                             transform: [{ translateX: this.textInputX }],
-                            height: height / 3,
+                            height: height / 2,
                             ...StyleSheet.absoluteFill,
-                            top: null,
+                            top:0,
                             justifyContent: 'center',
+                            backgroundColor:'rgba(0,0,0,0.3)',
+                            
                         }}
                     >
 
+
                         <TapGestureHandler onHandlerStateChange={this.onCloseState}>
                             <Animated.View style={styles.closeButton}>
-                                <Animated.Text style={{ fontSize: 15, color: 'white', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
+                                <Animated.Text style={{ fontSize: 15, color: '#ca2929', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
                                     X
                                 </Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
 
-                        <Text style={styles.titulo}>ENTRAR</Text>
+                        <Text style={styles.titulo}>Quase lá...</Text>
 
+
+                    <Icon 
+                        name='user-o' 
+                        color='white'
+                        size={28}
+                        style={styles.inputIcon}
+                    />
                         <TextInput
                             placeholder="E-mail"
                             style={styles.textInput}
-                            placeholderTextColor="#000"
+                            placeholderTextColor="#fff"
                         >
 
                         </TextInput>
+
+                        
+                    <Icon 
+                        name='lock' 
+                        color='white'
+                        size={32}
+                        style={styles.inputIcon}
+                    />
                         <TextInput
+                            password={true}
+                            secureTextEntry={true}
                             placeholder="Senha"
                             style={styles.textInput}
-                            placeholderTextColor="#000"
+                            placeholderTextColor="#fff"
+                            textContentType='password'
                         >
 
                         </TextInput>
+                        
                         <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Home')}>
                             <Animated.View style={styles.buttonEntrar}>
-                                <Text style={{ fontSize: 20, fontWeight: 'bold' }} >
+                                <Text style={{ color:'rgba(0,0,0,0.6)',fontSize: 20, fontWeight: 'bold' }} >
                                     ENTRAR
                             </Text>
+                            
                             </Animated.View>
                         </TapGestureHandler>
                     </Animated.View>
                 </View>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -234,9 +261,10 @@ const styles = StyleSheet.create({
     },
 
     titulo: {
-        bottom: 120,
-        left: width / 2 - 50,
-        color: "#ca2929",
+        bottom: 140,
+        justifyContent:'center',
+        textAlign:'center',
+        color: "#fff",
         fontWeight: 'bold',
         fontSize: 30,
     },
@@ -272,6 +300,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf:'center',
         marginVertical: 5,
         shadowColor: "#000",
         shadowOffset: {
@@ -281,39 +310,50 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        left: width / 2 - 80,
+  
     },
 
     textInput: {
         height: 60,
-        marginBottom: 15,
-
+        width: width - 55,
         bottom: 70,
-
+        alignSelf:'center',
+        color:'white',
         borderRadius: 25,
         borderWidth: 0.5,
         borderTopWidth: 0,
         borderRightWidth: 0,
         borderLeftWidth: 0,
-
         marginHorizontal: 20,
-        paddingLeft: 20,
-        marginVertical: 5,
-        borderColor: 'rgba(0,0,0,0.2)'
+        paddingLeft:53,
+        paddingTop:15,
+        marginVertical: 0,
+        borderColor: 'rgba(255,255,255,10)'
     },
 
     closeButton: {
         height: 50,
-        width: '35%',
-        backgroundColor: "red",
-        borderRadius: 20,
+        width: '12%',
+        backgroundColor: "#fff",
+        borderRadius: 200,
+        alignSelf:'center',
         alignItems: 'center',
         justifyContent: "center",
         position: 'absolute',
-        top: 240,
-        left: width / 2 - 60,
+        top: 360,
+        left: width / 2 - 24,
         shadowOffset: { width: 2, height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.2,
+    },
+
+    inputIcon: {
+        position:'relative',
+        bottom:16,
+        left: 50,
+    },
+
+    btnEye: {
+
     }
 });

@@ -25,23 +25,23 @@ const styles = StyleSheet.create({
 const slides = [
     {
         key: 'slide1',
-        text: 'Needy desenvovido pela Horizon para ajudar a salvar vidas',
-        textStyle: { color: '#8B4513' },
+        text: 'Needy foi desenvovido pela Horizon para ajudar a salvar vidas.',
+        textStyle: { color: '#ffb8b8' },
         image: require('../../assets/images/telaIntro/coracao.png'),
         imageStyle: { width: 100, height: 100 },
-        backgroundColor: '#FFDAB9',
+        backgroundColor: '#4b4b4b',
     },
     {
         key: 'slide2',
-        text: 'Com ele você poderá saber os locais mais próximos para se doar',
-        textStyle: { color: '#8B4513' },
+        text: 'Com ele você poderá saber os locais mais próximos para doar sangue!',
+        textStyle: { color: '#FFF' },
         image: require('../../assets/images/telaIntro/mapa.png'),
         imageStyle: { width: 100, height: 100 },
-        backgroundColor: '#EEE8AA',
+        backgroundColor: '#B39DDB',
     },
     {
         key: 'slide3',
-        text: 'Também poderá ter informações sobre as suas doações e da sua carteirinha de doador',
+        text: 'Também poderá se manter informado sobre as suas doações e acessar sua carteirinha de doador.',
         textStyle: { color: '#4682B4' },
         image: require('../../assets/images/telaIntro/livro.png'),
         imageStyle: { width: 100, height: 100 },
@@ -49,7 +49,7 @@ const slides = [
     },
     {
         key: 'slide4',
-        text: 'Ainda tem muitas mais funcionalidades, vamos começar!',
+        text: 'Agora que já sabe alguns benefícios de usar o Needy, vamos começar!',
         textStyle: { color: '#98FB98' },
         image: require('../../assets/images/telaIntro/verifica.png'),
         imageStyle: { width: 100, height: 100 },
@@ -72,7 +72,7 @@ export default class Intro extends React.Component {
     };
     _renderDoneButton = () => {
         return (
-            <TapGestureHandler onHandlerStateChange={()=> this.props.navigation.navigate('Login')}>
+            <TapGestureHandler onHandlerStateChange={()=> this.props.navigation.navigate('Cadastro')}>
                 <View style={styles.buttonCircle}>
                     <Ionicons
                         name="md-checkmark"
@@ -84,10 +84,16 @@ export default class Intro extends React.Component {
             </TapGestureHandler>
         );
     };
+
+
     render() {
         return (
             <AppIntroSlider
                 slides={slides}
+                showSkipButton= {true}
+                onSkip= {()=> this.props.navigation.navigate('Cadastro')}	
+                
+                renderSkipButton={this._renderSkipButton}
                 renderDoneButton={this._renderDoneButton}
                 renderNextButton={this._renderNextButton}
             />

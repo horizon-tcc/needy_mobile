@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, Colors} from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import {ProgressBar} from 'react-native-paper';
 
 export default class Home extends Component {
     render() {
@@ -8,7 +9,10 @@ export default class Home extends Component {
     return (
       <View style={styles.background}>
         <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Text>Home</Text>
+        
+
+     
+
       </View>
     );
   }

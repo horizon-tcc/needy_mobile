@@ -4,7 +4,6 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
 import Login from './pages/login';
 import Cadastro from './pages/cadastro';
 import Intro from './pages/intro';
@@ -56,9 +55,7 @@ const bottomNavigator = createMaterialBottomTabNavigator(
 
 const appNavigator = createSwitchNavigator(
     {
-        Intro: {
-            screen: Intro
-        },
+       
 
         Login: {
             screen: Login
@@ -68,12 +65,18 @@ const appNavigator = createSwitchNavigator(
             screen: Cadastro
         },
 
+
         Home: {
             screen: bottomNavigator
+        },
+
+
+        Intro: {
+            screen: Intro
         }
     },
     {
-        backBehavior: 'history'
+        backBehavior: 'none'
     }
 )
 
