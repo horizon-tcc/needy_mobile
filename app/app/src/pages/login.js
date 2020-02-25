@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions, TextInput, ImageBackground }
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { enableScreens } from 'react-native-screens';
 const { width, height } = Dimensions.get('window');
 
 const {
@@ -22,6 +23,8 @@ const {
     Extrapolate,
     concat
 } = Animated;
+
+
 
 function runTiming(clock, value, dest) {
     const state = {
@@ -54,8 +57,19 @@ function runTiming(clock, value, dest) {
 class Login extends Component {
     constructor() {
         super();
+        
+        this.state = {
+            eyeIcon: 'eye',
+            inputType: true,
+            
+        }
 
+
+
+        
         this.buttonOpacity = new Value(1);
+
+
 
         this.onStateChange = event([
             {
@@ -118,8 +132,33 @@ class Login extends Component {
             extrapolate: Extrapolate.CLAMP
         });
 
+        this.rotateEye = interpolate(this.buttonOpacity, {
+            inputRange: [0, 1],
+            outputRange: [180, 360 ],
+            extrapolate: Extrapolate.CLAMP
+        })
 
+        
     }
+
+    toggleEye() {
+        
+        if(this.state.eyeIcon.valueOf() == 'eye'){  
+            this.setState({
+                eyeIcon:'eye-slash',
+                inputType:false
+                
+            })
+        }else{
+            this.setState({
+                eyeIcon:'eye',
+                inputType:true
+                  
+            })
+        }
+        
+    }
+
     render() {
         return (
             <ImageBackground 
@@ -232,15 +271,26 @@ class Login extends Component {
                     />
                         <TextInput
                             password={true}
-                            secureTextEntry={true}
+                            secureTextEntry={this.state.inputType}
                             placeholder="Senha"
                             style={styles.textInput}
                             placeholderTextColor="rgba(0,0,0,0.4)"
                             textContentType='password'
+                            
                         >
-
                         </TextInput>
                         
+                        <TapGestureHandler onHandlerStateChange={() => this.toggleEye()}>
+                            <Animated.View style={styles.btnEye}>
+                            
+                                <Icon 
+                                    name= {this.state.eyeIcon} 
+                                    color='rgba(0,0,0,0.6)'
+                                    size={26}
+                                />
+                            </Animated.View>
+                        </TapGestureHandler>
+
                         <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Home')}>
                             <Animated.View style={styles.buttonEntrar}>
                                 <Text style={{ color:'rgba(0,0,0,0.6)',fontSize: 20, fontWeight: 'bold' }} >
@@ -255,6 +305,8 @@ class Login extends Component {
         );
     }
 }
+
+
 export default Login;
 
 const styles = StyleSheet.create({
@@ -328,8 +380,9 @@ const styles = StyleSheet.create({
         borderTopWidth: 0,
         borderRightWidth: 0,
         borderLeftWidth: 0,
-        marginHorizontal: 20,
+        marginHorizontal: 0,
         paddingLeft:53,
+        paddingRight:53,
         paddingTop:15,
         marginVertical: 0,
         borderColor: 'rgba(0,0,0,0.4)'
@@ -358,6 +411,8 @@ const styles = StyleSheet.create({
     },
 
     btnEye: {
-        
+        position:'absolute',
+        top:190,
+        left:340,
     }
 });
