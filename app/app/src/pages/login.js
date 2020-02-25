@@ -125,11 +125,15 @@ class Login extends Component {
             <ImageBackground 
                 style={{
                     flex: 1,
-                    backgroundColor: '#ca2929',
                     justifyContent: 'center',
-                    
+
                 }}
-            >
+
+                source={
+                    require('../../assets/images/telaLogin/bgLogin.png')
+                }
+
+                            >
                 <Animated.View
                     style={{
                         ...StyleSheet.absoluteFill,
@@ -186,9 +190,9 @@ class Login extends Component {
                             transform: [{ translateX: this.textInputX }],
                             height: height / 2,
                             ...StyleSheet.absoluteFill,
-                            top:0,
+                            top:80,
                             justifyContent: 'center',
-                            backgroundColor:'rgba(0,0,0,0.3)',
+                            backgroundColor:'white',
                             
                         }}
                     >
@@ -196,25 +200,25 @@ class Login extends Component {
 
                         <TapGestureHandler onHandlerStateChange={this.onCloseState}>
                             <Animated.View style={styles.closeButton}>
-                                <Animated.Text style={{ fontSize: 15, color: '#ca2929', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
+                                <Animated.Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
                                     X
                                 </Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
 
-                        <Text style={styles.titulo}>Quase lá...</Text>
+                        <Text style={styles.titulo}>Bem-vindo!</Text>
 
 
                     <Icon 
                         name='user-o' 
-                        color='white'
+                        color='red'
                         size={28}
                         style={styles.inputIcon}
                     />
                         <TextInput
                             placeholder="E-mail"
                             style={styles.textInput}
-                            placeholderTextColor="#fff"
+                            placeholderTextColor="rgba(0,0,0,0.4)"
                         >
 
                         </TextInput>
@@ -222,7 +226,7 @@ class Login extends Component {
                         
                     <Icon 
                         name='lock' 
-                        color='white'
+                        color='red'
                         size={32}
                         style={styles.inputIcon}
                     />
@@ -231,7 +235,7 @@ class Login extends Component {
                             secureTextEntry={true}
                             placeholder="Senha"
                             style={styles.textInput}
-                            placeholderTextColor="#fff"
+                            placeholderTextColor="rgba(0,0,0,0.4)"
                             textContentType='password'
                         >
 
@@ -261,10 +265,10 @@ const styles = StyleSheet.create({
     },
 
     titulo: {
-        bottom: 140,
+        bottom: 200,
         justifyContent:'center',
         textAlign:'center',
-        color: "#fff",
+        color: "white",
         fontWeight: 'bold',
         fontSize: 30,
     },
@@ -318,7 +322,7 @@ const styles = StyleSheet.create({
         width: width - 55,
         bottom: 70,
         alignSelf:'center',
-        color:'white',
+        color:'black',
         borderRadius: 25,
         borderWidth: 0.5,
         borderTopWidth: 0,
@@ -328,13 +332,13 @@ const styles = StyleSheet.create({
         paddingLeft:53,
         paddingTop:15,
         marginVertical: 0,
-        borderColor: 'rgba(255,255,255,10)'
+        borderColor: 'rgba(0,0,0,0.4)'
     },
 
     closeButton: {
         height: 50,
         width: '12%',
-        backgroundColor: "#fff",
+        backgroundColor: "red",
         borderRadius: 200,
         alignSelf:'center',
         alignItems: 'center',
@@ -354,6 +358,6 @@ const styles = StyleSheet.create({
     },
 
     btnEye: {
-
+        
     }
 });
