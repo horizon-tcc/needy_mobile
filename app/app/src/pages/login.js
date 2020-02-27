@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions, TextInput, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions, TextInput, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import Animated, { Easing } from 'react-native-reanimated';
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { enableScreens } from 'react-native-screens';
 const { width, height } = Dimensions.get('window');
 
 const {
@@ -141,9 +140,9 @@ class Login extends Component {
         
     }
 
-    toggleEye() {
-        
-        if(this.state.eyeIcon.valueOf() == 'eye'){  
+      toggleEye() {
+           
+          if(this.state.eyeIcon.valueOf() == 'eye'){  
             this.setState({
                 eyeIcon:'eye-slash',
                 inputType:false
@@ -161,12 +160,13 @@ class Login extends Component {
 
     render() {
         return (
-            <ImageBackground 
-                style={{
-                    flex: 1,
-                    justifyContent: 'center',
 
-                }}
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior='padding'
+            >
+            <ImageBackground 
+                style={styles.container}
 
                 source={
                     require('../../assets/images/telaLogin/bgLogin.png')
@@ -237,15 +237,10 @@ class Login extends Component {
                     >
 
 
-                        <TapGestureHandler onHandlerStateChange={this.onCloseState}>
-                            <Animated.View style={styles.closeButton}>
-                                <Animated.Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
-                                    X
-                                </Animated.Text>
-                            </Animated.View>
-                        </TapGestureHandler>
 
-                        <Text style={styles.titulo}>Bem-vindo!</Text>
+                        < View style={styles.containerTitle}>
+                            <Text style={styles.titulo}>Bem-vindo!</Text>
+                        </View>
 
 
                     <Icon 
@@ -280,7 +275,7 @@ class Login extends Component {
                         >
                         </TextInput>
                         
-                        <TapGestureHandler onHandlerStateChange={() => this.toggleEye()}>
+                        <TapGestureHandler onHandlerStateChange={() =>  this.toggleEye()}>
                             <Animated.View style={styles.btnEye}>
                             
                                 <Icon 
@@ -290,7 +285,7 @@ class Login extends Component {
                                 />
                             </Animated.View>
                         </TapGestureHandler>
-
+                  
                         <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Home')}>
                             <Animated.View style={styles.buttonEntrar}>
                                 <Text style={{ color:'rgba(0,0,0,0.6)',fontSize: 20, fontWeight: 'bold' }} >
@@ -299,9 +294,21 @@ class Login extends Component {
                             
                             </Animated.View>
                         </TapGestureHandler>
+
+                        
+                        <TapGestureHandler onHandlerStateChange={this.onCloseState}>
+                            <Animated.View style={styles.closeButton}>
+                                <Animated.Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
+                                    X
+                                </Animated.Text>
+                            </Animated.View>
+                        </TapGestureHandler>
+
+
                     </Animated.View>
                 </View>
             </ImageBackground>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -312,14 +319,14 @@ export default Login;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        
         justifyContent: 'center'
     },
 
     titulo: {
-        bottom: 200,
         justifyContent:'center',
         textAlign:'center',
+        alignItems:'center',
         color: "white",
         fontWeight: 'bold',
         fontSize: 30,
@@ -345,12 +352,18 @@ const styles = StyleSheet.create({
 
     },
 
+    containerTitle : {
+        flex:1,
+        height:100,
+        bottom:130,
+    },
+
 
     buttonEntrar: {
         backgroundColor: 'white',
         height: 50,
         width: '35%',
-
+        marginTop:30,
         marginBottom: 10,
         marginHorizontal: 20,
         borderRadius: 15,
@@ -372,7 +385,6 @@ const styles = StyleSheet.create({
     textInput: {
         height: 60,
         width: width - 55,
-        bottom: 70,
         alignSelf:'center',
         color:'black',
         borderRadius: 25,
@@ -390,15 +402,14 @@ const styles = StyleSheet.create({
 
     closeButton: {
         height: 50,
-        width: '12%',
+        width:50,
+        marginTop:10,
         backgroundColor: "red",
         borderRadius: 200,
         alignSelf:'center',
         alignItems: 'center',
         justifyContent: "center",
-        position: 'absolute',
-        top: 360,
-        left: width / 2 - 24,
+        position: 'relative',
         shadowOffset: { width: 2, height: 2 },
         shadowColor: 'black',
         shadowOpacity: 0.2,
@@ -406,13 +417,13 @@ const styles = StyleSheet.create({
 
     inputIcon: {
         position:'relative',
-        bottom:16,
+        top:55,
         left: 50,
     },
 
     btnEye: {
-        position:'absolute',
-        top:190,
-        left:340,
+        position:'relative',
+        bottom:30,
+        left:width - 80,
     }
 });
