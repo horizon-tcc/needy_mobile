@@ -76,7 +76,8 @@ const appNavigator = createSwitchNavigator(
         }
     },
     {
-        backBehavior: 'none'
+
+        backBehavior: 'history'
     }
 )
 

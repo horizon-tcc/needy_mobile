@@ -58,7 +58,7 @@ class Login extends Component {
         super();
         
         this.state = {
-            eyeIcon: 'eye',
+            eyeIcon: 'eye-slash',
             inputType: true,
             
         }
@@ -131,12 +131,6 @@ class Login extends Component {
             extrapolate: Extrapolate.CLAMP
         });
 
-        this.rotateEye = interpolate(this.buttonOpacity, {
-            inputRange: [0, 1],
-            outputRange: [180, 360 ],
-            extrapolate: Extrapolate.CLAMP
-        })
-
         
     }
 
@@ -145,13 +139,13 @@ class Login extends Component {
           if(this.state.eyeIcon.valueOf() == 'eye'){  
             this.setState({
                 eyeIcon:'eye-slash',
-                inputType:false
+                inputType:true
                 
             })
-        }else{
+            }else{
             this.setState({
                 eyeIcon:'eye',
-                inputType:true
+                inputType:false
                   
             })
         }
@@ -288,18 +282,20 @@ class Login extends Component {
                   
                         <TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Home')}>
                             <Animated.View style={styles.buttonEntrar}>
-                                <Text style={{ color:'rgba(0,0,0,0.6)',fontSize: 20, fontWeight: 'bold' }} >
+                                <Text style={{ color:'white',fontSize: 20, fontWeight: 'bold' }} >
                                     ENTRAR
-                            </Text>
+                                </Text>
                             
                             </Animated.View>
                         </TapGestureHandler>
 
                         
+
+                        
                         <TapGestureHandler onHandlerStateChange={this.onCloseState}>
                             <Animated.View style={styles.closeButton}>
-                                <Animated.Text style={{ fontSize: 15, color: '#fff', fontWeight: 'bold', transform: [{ rotate: concat(this.rotateCross, 'deg') }] }} >
-                                    X
+                                <Animated.Text style={{ fontSize: 18, color: 'rgba(0,0,0,0.3)', fontWeight: 'bold'}} >
+                                        VOLTAR               
                                 </Animated.Text>
                             </Animated.View>
                         </TapGestureHandler>
@@ -360,9 +356,9 @@ const styles = StyleSheet.create({
 
 
     buttonEntrar: {
-        backgroundColor: 'white',
-        height: 50,
-        width: '35%',
+        backgroundColor: '#ca2929',
+        height: 60,
+        width: width - 85,
         marginTop:30,
         marginBottom: 10,
         marginHorizontal: 20,
@@ -401,11 +397,11 @@ const styles = StyleSheet.create({
     },
 
     closeButton: {
-        height: 50,
-        width:50,
+        height: 60,
+        width: width - 85,
         marginTop:10,
-        backgroundColor: "red",
-        borderRadius: 200,
+        backgroundColor: "#fff",
+        borderRadius: 10,
         alignSelf:'center',
         alignItems: 'center',
         justifyContent: "center",
