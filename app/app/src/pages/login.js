@@ -20,7 +20,6 @@ const {
     clockRunning,
     interpolate,
     Extrapolate,
-    concat
 } = Animated;
 
 
