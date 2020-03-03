@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from './node_modules/react';
 
 import {
     View,
@@ -10,9 +10,9 @@ import {
     StyleSheet
 
 } from 'react-native';
-import Svg, { Path, G } from "react-native-svg";
-import { tween, easing } from 'popmotion';
-import { interpolate } from 'flubber';
+import Svg, { Path, G } from "./node_modules/react-native-svg";
+import { tween, easing } from './node_modules/popmotion';
+import { interpolate } from './node_modules/flubber';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('screen');

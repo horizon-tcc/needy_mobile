@@ -2,7 +2,7 @@
 // Ícones feitos por <a href="https://www.flaticon.com/br/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/br/" title="Flaticon"> www.flaticon.com</a>
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
-import { StyleSheet, Dimensions } from 'react-native';
+import styles from './styles'
 
 export default class Maps extends React.Component {
 	render() {
@@ -230,18 +230,7 @@ export default class Maps extends React.Component {
 	}
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	mapStyle: {
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height,
-	},
-});
+
 
 
 

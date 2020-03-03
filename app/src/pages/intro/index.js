@@ -6,21 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, View } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { TapGestureHandler } from 'react-native-gesture-handler';
-
-const styles = StyleSheet.create({
-    buttonCircle: {
-        width: 40,
-        height: 40,
-        backgroundColor: 'rgba(0, 0, 0, .2)',
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    image: {
-        width: 320,
-        height: 320,
-    },
-});
+import styles from './styles'
 
 const slides = [
     {
@@ -72,7 +58,7 @@ export default class Intro extends React.Component {
     };
     _renderDoneButton = () => {
         return (
-            <TapGestureHandler onHandlerStateChange={()=> this.props.navigation.navigate('Cadastro')}>
+            <TapGestureHandler onHandlerStateChange={()=> this.props.navigation.navigate('Home')}>
                 <View style={styles.buttonCircle}>
                     <Ionicons
                         name="md-checkmark"
