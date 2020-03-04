@@ -8,7 +8,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: tela.state.width,
+        
         justifyContent: 'center'
     },
 
@@ -113,6 +113,8 @@ const styles = StyleSheet.create({
     btnEye: {
         position:'relative',
         bottom:30,
-        left: tela.state.width - 80,
+        left:tela.state.width - 80,
     }
 });
+
+export default styles;
