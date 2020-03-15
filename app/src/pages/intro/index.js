@@ -7,6 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import styles from './styles'
+import { ScreenContainer } from 'react-native-screens';
 
 const slides = [
     {
@@ -43,7 +44,7 @@ const slides = [
     },
 ];
 
-export default class Intro extends React.Component {
+export default function Intro ({navigation}) {
     _renderNextButton = () => {
         return (
             <View style={styles.buttonCircle}>
@@ -58,7 +59,8 @@ export default class Intro extends React.Component {
     };
     _renderDoneButton = () => {
         return (
-            <TapGestureHandler onHandlerStateChange={()=> this.props.navigation.navigate('Home')}>
+          <ScreenContainer>          
+              <TapGestureHandler onHandlerStateChange={()=> navigation.navigate('Home')}>
                 <View style={styles.buttonCircle}>
                     <Ionicons
                         name="md-checkmark"
@@ -68,11 +70,12 @@ export default class Intro extends React.Component {
                     />
                 </View>
             </TapGestureHandler>
+            </ScreenContainer>
+
         );
     };
 
 
-    render() {
         return (
             <AppIntroSlider
                 slides={slides}
@@ -84,5 +87,5 @@ export default class Intro extends React.Component {
                 renderNextButton={this._renderNextButton}
             />
         );
-    }
+    
 }

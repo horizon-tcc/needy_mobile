@@ -3,10 +3,13 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import styles from './styles'
+import { View } from 'react-native';
 
 export default class Maps extends React.Component {
 	render() {
 		return (
+
+			<View style={styles.container}>
 			<MapView
 				style={styles.mapStyle}
 				initialRegion={{
@@ -226,6 +229,8 @@ export default class Maps extends React.Component {
 					image={require('../../assets/images/telas/telaMaps/sangue.png')}
 				/>
 			</MapView>
+
+			</View>
 		);
 	}
 }
