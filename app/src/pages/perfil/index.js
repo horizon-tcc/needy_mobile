@@ -6,7 +6,12 @@ export default class Profile extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>Perfil</Text>
+				<View style={styles.profileBackground}>
+					<View style ={styles.profilePic} />
+
+				
+				
+				</View>
 			</View>
 		);
 	}

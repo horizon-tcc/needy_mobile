@@ -96,7 +96,9 @@ const StackNavigation = createStackNavigator(
 		headerMode: "none",
 		defaultNavigationOptions:{
 			animationEnabled:false,
+			
 		}
+		
 	}
 
 	
