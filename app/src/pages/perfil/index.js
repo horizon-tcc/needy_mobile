@@ -32,10 +32,7 @@ export default class Profile extends React.Component {
 					</View>
 
 					<View style={styles.achivContainer}>
-						<Image 
-							source={{uri:''}}
-							style={styles.}
-						/>
+						
 					</View>
 
 
