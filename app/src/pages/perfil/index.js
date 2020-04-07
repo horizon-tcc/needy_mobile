@@ -32,8 +32,36 @@ export default class Profile extends React.Component {
 					</View>
 
 					<View style={styles.achivContainer}>
+						<Image
+							style={styles.conquer}
+							source={{ uri: 'https://i.pinimg.com/originals/c7/80/5e/c7805ee9aa1a16baaa33a7b1be2f220e.png' }}
+						/>
+
+						<View style={styles.infoContainer}>
+							<View style={styles.divLine} />
+							<Text style={styles.value}>
+								10
+							</Text>
+
+							<Text style={styles.subOne}>
+								Doações Realizadas
+							</Text>
+
+							<Text style={styles.valueTwo}>
+								4,5L
+							</Text>
+
+							<Text style={styles.subTwo}>
+								Litros Doados
+							</Text>
+						</View>
+
 						
 					</View>
+
+					
+
+
 
 
 				</View>

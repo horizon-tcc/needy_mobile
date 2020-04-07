@@ -65,14 +65,80 @@ const styles = StyleSheet.create({
       marginTop: 35 ,
       alignSelf:'center',
       alignItems:'center',
-      width: width - 100,
+      width: width - 70,
       height: 210,
       borderColor: '#b8b8b8',
       borderWidth: 1,
       borderRadius: 20,
-    }
+    },
+
+    conquer: {
+      width: 120,
+      height: 120,
+      backgroundColor: '#ca2929',
+      marginTop: 14,
+
+    },
+    
+    infoContainer: {
+        width: width - 125,
+        height : 70,
+        backgroundColor: '#fff',
+      //  borderWidth: 1,
+        //borderColor: '#ca2929',
+    },
+
+    divLine: {
+      width: 1.5,
+      marginTop: 25,
+      marginLeft: '50%',
+      height: 40,
+      backgroundColor: '#ca2929'
+      
+    },
+
+    value: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#ca2929',
+      position:'absolute',
+      alignSelf:'flex-start',
+      marginTop: 15,
+      marginLeft:'20%',
+    
+    },
+
+    valueTwo: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#ca2929',
+      position:'absolute',
+      alignSelf:'flex-end',
+      marginTop: 15,
+      marginRight:'25%',
+    
+    },
 
 
+    subOne: {
+      fontSize: 12.5,
+      marginTop: '15%',
+      color:'#707070',
+      position: 'absolute',
+      alignSelf:'flex-start'
+    },
+
+    
+    subTwo: {
+      fontSize: 12.5,
+      marginTop: '15%',
+      marginRight:'10%',
+      color:'#707070',
+      position: 'absolute',
+      alignSelf:'flex-end'
+    },
+
+    
 
 
 
