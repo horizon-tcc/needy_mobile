@@ -194,7 +194,7 @@ class Login extends Component {
             return (
                   <KeyboardAvoidingView
                         style={styles.container}
-                        behavior="padding"
+                        behavior="height"
                   >
                         <ImageBackground
                               style={styles.container}
