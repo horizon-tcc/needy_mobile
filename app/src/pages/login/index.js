@@ -160,50 +160,35 @@ class Login extends Component {
       }
 
       render() {
-            const getUserId = async () => {
-                  let userId = "";
-                  try {
-                        userId = (await AsyncStorage.getItem("id")) || "none";
-                  } catch (error) {
-                        console.log(error.message);
-                  }
-                  return userId;
-            };
-
-            let situacao = null;
-
-            console.log(this.state.email);
-            console.log(this.state.senha);
-
-            axios({
-                  method: "post",
-                  url: "http://needy-api.herokuapp.com/login",
-                  data: {
-                        email: this.state.email.toString(),
-                        senha: this.state.senha.toString(),
-                  },
-            }).then((response) => {
-                  console.log(response);
-                  if (typeof response.data.idUsuario == "number") {
-                        situacao = true;
-                        console.log(`ìdUsuario: ${response.data.idUsuario}`);
-                        AsyncStorage.setItem("id", response.data.idUsuario);
-                        //    console.log(`AsyncStorage: ${AsyncStorage.getItem("id")}`);
-                        console.log(AsyncStorage);
-                        console.log(`getID: ${getUserId()}`);
-                  } else {
-                        situacao = false;
-                  }
-            }).catch = (e) => {
-                  console.log(e);
-            };
 
             validar = () => {
-                  if (situacao) {
-                        this.props.navigation.navigate("Home");
-                  } else {
-                        console.log("login inválido");
-                  }
+
+                  axios({
+                        method: "post",
+                        url: "http://needy-api.herokuapp.com/login",
+                        data: {
+                              email: this.state.email.toString(),
+                              senha: this.state.senha.toString(),
+                        },
+                  }).then((response) => {
+                        if (typeof response.data.sucess) {
+                              AsyncStorage.setItem("id", response.data.idUsuario);
+                              AsyncStorage.setItem("token", response.data.token);
+                              this.props.navigation.navigate("Home");
+                        } else {
+                              Alert.alert(
+                                    "Login Inválido",
+                                    "Por favor insira um login válido!",
+                                    [
+                                          { text: "OK", onPress: () => console.log("OK Pressed") }
+                                    ],
+                                    { cancelable: false }
+                              );
+                        }
+                  }).catch = (e) => {
+                        console.log(e);
+                  };
+
             };
 
             return (

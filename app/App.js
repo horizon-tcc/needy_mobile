@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import Login from './src/pages/login/';
@@ -43,12 +43,6 @@ const NavBar = createBottomTabNavigator(
 				tabBarIcon: ({ tintColor }) => <FontAwesome5 name="user" color={tintColor} size={24} />
 
 			},
-
-
-
-
-
-
 		}
 	},
 
@@ -57,27 +51,13 @@ const NavBar = createBottomTabNavigator(
 			showLabel: false,
 			inactiveTintColor: '#CDCCCE',
 			activeTintColor: '#ca2929'
-
-
-
 		}
-
-
-
-
-
-
-
-
-
-
 	}
 )
 
 
 
-const StackNavigation = createStackNavigator(
-
+const SwitchNavigation = createSwitchNavigator(
 	{
 		Login: {
 			screen: Login
@@ -91,21 +71,16 @@ const StackNavigation = createStackNavigator(
 			screen: NavBar
 		}
 	},
-
 	{
 		headerMode: "none",
 		defaultNavigationOptions:{
 			animationEnabled:false,
 			
 		}
-		
 	}
-
-	
-	
 )
 
 
-export default createAppContainer(StackNavigation);
+export default createAppContainer(SwitchNavigation);
 
 
