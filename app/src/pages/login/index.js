@@ -250,7 +250,7 @@ class Login extends Component {
                                                 </Text>
                                           </Animated.View>
                                     </TapGestureHandler>
-
+                              
                                     <TapGestureHandler
                                           onHandlerStateChange={() =>
                                                 this.props.navigation.navigate(
@@ -258,6 +258,7 @@ class Login extends Component {
                                                 )
                                           }
                                     >
+                              
                                           <Animated.View
                                                 style={{
                                                       ...styles.button,

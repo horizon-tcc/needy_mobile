@@ -28,7 +28,7 @@ const initialPath = "M112.6 33.44C128.95 33.44 142.2 47.38 142.2 64.58C142.2 112
 
 
 
-export default class Cadastro extends Component {
+export default class HeartAnimation extends Component {
 
     state = {
         animation: new Animated.Value(0),

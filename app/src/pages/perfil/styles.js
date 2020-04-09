@@ -70,12 +70,14 @@ const styles = StyleSheet.create({
       borderColor: '#b8b8b8',
       borderWidth: 1,
       borderRadius: 20,
+ 
     },
 
     conquer: {
       width: 120,
       height: 120,
-      backgroundColor: '#ca2929',
+      borderRadius: 60,
+      backgroundColor: '#fff',
       marginTop: 14,
 
     },
@@ -137,6 +139,69 @@ const styles = StyleSheet.create({
       position: 'absolute',
       alignSelf:'flex-end'
     },
+
+
+    subContainer: {
+      alignSelf:'center',
+      borderWidth:1,
+      borderColor: '#b8b8b8',
+      width : width - 70,
+      marginTop: 40,
+      height: 135,
+    },
+
+    cardContainer: {
+      width: width - 70,
+      height: height - 700,
+      marginTop: 30,
+      alignSelf: 'center',
+    },
+
+    optionOne: {
+      width: '45%',
+      backgroundColor:'#ca2929',
+      justifyContent:'center',
+      alignItems:'center',
+      height: 100,
+      borderRadius: 10,
+      marginTop: 20,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.27,
+      shadowRadius: 4.65,
+
+      elevation: 6,
+    }, 
+
+    
+    optionTwo: {
+      width: '45%',
+      position: 'absolute',
+      alignSelf: 'flex-end',
+      backgroundColor:'#ca2929',
+      justifyContent:'center',
+      alignItems:'center',
+      height: 100,
+      borderRadius: 10,
+      marginTop: 20,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 3,
+      },
+      shadowOpacity: 0.27,
+      shadowRadius: 4.65,
+
+      elevation: 6,
+    }, 
+
+    optionSub: {
+      color: 'white',
+      fontSize: 16,
+    }
 
     
 

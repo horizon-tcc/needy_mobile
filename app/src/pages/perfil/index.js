@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './styles'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, TapGestureHandler } from 'react-native-gesture-handler';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 export default class Profile extends React.Component {
@@ -55,14 +55,44 @@ export default class Profile extends React.Component {
 								Litros Doados
 							</Text>
 						</View>
-
-						
 					</View>
 
-					
+					<View style={styles.subContainer}>
+						<Text>
+							Finge que tem algo dentro
+						</Text>
 
+					</View>
 
+					<View style={styles.cardContainer}>
 
+						<TapGestureHandler>
+
+							
+								<View style={styles.optionOne}>
+									
+									<Text style={styles.optionSub}>Conquistas</Text>
+								</View>
+
+								
+							
+							
+						</TapGestureHandler>
+
+						
+						<TapGestureHandler>
+
+							
+								<View style={styles.optionTwo}>
+									<Text style={styles.optionSub}>Documento</Text>
+								</View>
+
+								
+							
+							
+						</TapGestureHandler>
+
+					</View>
 
 				</View>
 			</View>

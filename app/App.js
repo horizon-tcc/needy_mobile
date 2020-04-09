@@ -13,7 +13,14 @@ import MapButton from './src/components/MapButton';
 
 
 
-
+const config = {
+	tabBarOptions: {
+		showLabel: false,
+		inactiveTintColor: '#CDCCCE',
+		activeTintColor: '#ca2929'
+	}
+	
+}
 
 
 const NavBar = createBottomTabNavigator(
@@ -32,8 +39,10 @@ const NavBar = createBottomTabNavigator(
 		Map: {
 			screen: Maps,
 			navigationOptions: {
-				tabBarIcon: <MapButton />
-			}
+				tabBarIcon: <MapButton />,
+			
+			},
+			
 		},
 
 		Profile: {
@@ -45,15 +54,12 @@ const NavBar = createBottomTabNavigator(
 			},
 		}
 	},
-
-	{
-		tabBarOptions: {
-			showLabel: false,
-			inactiveTintColor: '#CDCCCE',
-			activeTintColor: '#ca2929'
-		}
-	}
+	config
+	
 )
+
+
+
 
 
 
