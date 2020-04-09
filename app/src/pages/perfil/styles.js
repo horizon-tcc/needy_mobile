@@ -143,11 +143,12 @@ const styles = StyleSheet.create({
 
     subContainer: {
       alignSelf:'center',
-      borderWidth:1,
-      borderColor: '#b8b8b8',
+      //borderWidth:1,
+      //borderColor: '#b8b8b8',
       width : width - 70,
       marginTop: 40,
       height: 135,
+      
     },
 
     cardContainer: {
@@ -201,7 +202,30 @@ const styles = StyleSheet.create({
     optionSub: {
       color: 'white',
       fontSize: 16,
+    },
+
+    optionImage : {
+      width: 50,
+      height: 50,
+    },
+
+    customOuterCircle: {
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      borderColor: '#ca2929'
+    
+    },
+
+
+    dayInfo: {
+      borderWidth: 1,
+      borderColor: '#ca2929',
+      width: '60%',
+      height: '100%',
+      alignSelf: 'flex-end',
+      position: 'absolute',
     }
+
 
     
 

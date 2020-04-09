@@ -2,7 +2,14 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from './styles'
 import { TouchableOpacity, TapGestureHandler } from 'react-native-gesture-handler';
+import ProgressCircle from 'react-native-progress-circle'
+
 import { FontAwesome5 } from '@expo/vector-icons';
+
+
+
+
+
 
 export default class Profile extends React.Component {
 	render() {
@@ -31,6 +38,7 @@ export default class Profile extends React.Component {
 						<View style={styles.line} />
 					</View>
 
+
 					<View style={styles.achivContainer}>
 						<Image
 							style={styles.conquer}
@@ -58,38 +66,61 @@ export default class Profile extends React.Component {
 					</View>
 
 					<View style={styles.subContainer}>
-						<Text>
-							Finge que tem algo dentro
-						</Text>
 
+						<ProgressCircle
+							percent={33}
+							radius={65}
+							borderWidth={10}
+							color="#ca2929"
+							shadowColor="#fff"
+							
+							containerStyle={styles.customOuterCircle}
+							outerCircleStyle={styles.insideCircle}
+						>
+							<Text style={{ fontSize: 18,color: '#ca2929' }}>{'33%'}</Text>
+						</ProgressCircle>
+
+						<View style={styles.dayInfo}>
+
+						</View>
 					</View>
+					
+
 
 					<View style={styles.cardContainer}>
 
 						<TapGestureHandler>
 
-							
-								<View style={styles.optionOne}>
-									
-									<Text style={styles.optionSub}>Conquistas</Text>
-								</View>
 
-								
-							
-							
+							<View style={styles.optionOne}>
+								<Image
+									style={styles.optionImage}
+									source={require('../../assets/images/telas/telaPerfil/conquista.png')}
+								/>
+
+								<Text style={styles.optionSub}>Conquistas</Text>
+							</View>
+
+
+
+
 						</TapGestureHandler>
 
-						
+
 						<TapGestureHandler>
 
-							
-								<View style={styles.optionTwo}>
-									<Text style={styles.optionSub}>Documento</Text>
-								</View>
 
-								
-							
-							
+							<View style={styles.optionTwo}>
+								<Image
+									style={styles.optionImage}
+									source={require('../../assets/images/telas/telaPerfil/carteirinha.png')}
+								/>
+								<Text style={styles.optionSub}>Documento</Text>
+							</View>
+
+
+
+
 						</TapGestureHandler>
 
 					</View>
