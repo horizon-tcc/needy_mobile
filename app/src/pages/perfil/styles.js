@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       backgroundColor:'#fff',
       width:  width,
-      height: height - 145,
+      height: height - 130,
       borderTopLeftRadius: 60
 
     },
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
       height: 120,
       borderRadius:60,
       width: 120,
+      zIndex: 1
     },
 
     
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
       //borderWidth:1,
       //borderColor: '#b8b8b8',
       width : width - 70,
-      marginTop: 40,
+      marginTop: 30,
       height: 135,
       
     },
@@ -154,7 +155,8 @@ const styles = StyleSheet.create({
     cardContainer: {
       width: width - 70,
       height: height - 700,
-      marginTop: 30,
+      marginTop: 40,
+      marginBottom: 25,
       alignSelf: 'center',
     },
 
