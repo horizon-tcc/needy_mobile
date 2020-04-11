@@ -1,5 +1,5 @@
 import {StyleSheet, Dimensions} from 'react-native'
-const {height, width} = Dimensions.get('window');
+const {height, width} = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
     container: {
@@ -10,10 +10,11 @@ const styles = StyleSheet.create({
     },
 
     profileBackground :{
+      marginTop: 110,
       justifyContent: 'flex-start',
       backgroundColor:'#fff',
       width:  width,
-      height: height - 130,
+      height: 718,
       borderTopLeftRadius: 60
 
     },
@@ -144,8 +145,7 @@ const styles = StyleSheet.create({
 
     subContainer: {
       alignSelf:'center',
-      //borderWidth:1,
-      //borderColor: '#b8b8b8',
+      marginLeft: '10%',
       width : width - 70,
       marginTop: 30,
       height: 135,
@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
       width: width - 70,
       height: height - 700,
       marginTop: 40,
-      marginBottom: 25,
       alignSelf: 'center',
     },
 
@@ -220,13 +219,45 @@ const styles = StyleSheet.create({
 
 
     dayInfo: {
-      borderWidth: 1,
-      borderColor: '#ca2929',
+      //borderWidth: 1,
+
       width: '60%',
       height: '100%',
       alignSelf: 'flex-end',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
       position: 'absolute',
+    },
+
+    divisor: {
+      height:1,
+      backgroundColor: '#ca2929',
+      width: '50%',
+    },
+
+    date: {
+      padding: 2,
+      paddingTop: 5,
+      fontSize: 42,
+      color: '#ca2929',
+      fontWeight: 'bold',
+    },
+
+    dateMonth: {
+      padding: 2,
+      fontSize: 30,
+      color: '#ca2929',
+      fontWeight: 'bold',
+    },
+
+    dateSub: {
+      color: '#ca2929',
+      fontWeight:'bold',
     }
+
+    
+
+
 
 
     
