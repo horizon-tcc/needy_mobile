@@ -3,7 +3,7 @@ import { View, SafeAreaView, Text, Image } from 'react-native';
 import styles from './styles'
 import { TouchableOpacity, TapGestureHandler, ScrollView } from 'react-native-gesture-handler';
 import ProgressCircle from 'react-native-progress-circle'
-
+import {Tooltip} from 'react-native-elements';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 
@@ -70,7 +70,16 @@ export default class Profile extends React.Component {
 						</View>
 
 						<View style={styles.subContainer}>
-							<FontAwesome5 name='info-circle' color={'#ec6262'}  size={22} />
+							<Tooltip 
+								popover={<Text style={{color:'#fff', fontWeight:'bold'}}>Progresso até estar apto a doar novamente</Text>}
+								containerStyle={{backgroundColor: '#ec6262'}}
+								pointerColor={'#fff'}
+								height={80}
+								width={200}
+
+							>
+								<FontAwesome5 name='info-circle' color={'#ec6262'}  size={22} />
+							</Tooltip>
 							<ProgressCircle
 								percent={73}
 								radius={60}
