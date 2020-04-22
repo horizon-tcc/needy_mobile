@@ -1,4 +1,5 @@
 import React from "react";
+import {View} from 'react-native';
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
@@ -9,7 +10,9 @@ import Intro from "./src/pages/intro/";
 import Maps from "./src/pages/maps/";
 import Home from "./src/pages/home/";
 import Perfil from "./src/pages/perfil/";
+import Config from './src/pages/config/';
 import MapButton from "./src/components/MapButton";
+import { TouchableNativeFeedback } from "react-native-gesture-handler";
 
 const config = {
 	tabBarOptions: {
@@ -58,24 +61,47 @@ const NavBar = createBottomTabNavigator(
 	config
 );
 
-const SwitchNavigation = createSwitchNavigator(
+
+
+
+const SwitchNavigation = createStackNavigator(
 	{
+		
 		Login: {
 			screen: Login,
+			
 		},
 
 		Intro: {
 			screen: Intro,
 		},
 
+		
+		Config: {
+			screen: Config,
+			navigationOptions: {
+				title: 'Configurações',
+				animationEnabled: true,
+				
+				headerShown: true,
+				headerTintColor: '#fff',
+				headerStyle: {
+					backgroundColor: '#ca2929',
+				  },
+			}
+			
+		},
+
+
 		Home: {
 			screen: NavBar,
 		},
+
 	},
 	{
-		headerMode: "none",
 		defaultNavigationOptions: {
 			animationEnabled: false,
+			headerShown: false,
 		},
 	}
 );

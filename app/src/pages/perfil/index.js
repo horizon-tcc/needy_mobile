@@ -26,8 +26,8 @@ export default class Profile extends React.Component {
 
 
 						<View style={styles.editBtn}>
-							<TouchableOpacity>
-								<FontAwesome5 name='bars' color='white' size={18} />
+							<TouchableOpacity onPress={() => this.props.navigation.navigate('Config')}>
+								<FontAwesome5 name='cog' color='white' size={18} />
 							</TouchableOpacity>
 
 						</View>
