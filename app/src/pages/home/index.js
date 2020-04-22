@@ -22,7 +22,18 @@ export default class Home extends Component {
 							scrollEventThrottle={16}
 							showsHorizontalScrollIndicator={false}
 						>
-							<Campanha props={this.props} />
+							<Campanha
+								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
+							/>
+							<Campanha
+								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
+							/>
+							<Campanha
+								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
+							/>
+							<Campanha
+								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
+							/>
 						</ScrollView>
 					</ScrollView>
 				</ImageBackground>
