@@ -1,5 +1,5 @@
 import React from "react";
-import {View} from 'react-native';
+import { View } from "react-native";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
@@ -10,8 +10,10 @@ import Intro from "./src/pages/intro/";
 import Maps from "./src/pages/maps/";
 import Home from "./src/pages/home/";
 import Perfil from "./src/pages/perfil/";
-import Config from './src/pages/config/';
+import Config from "./src/pages/config/";
 import MapButton from "./src/components/MapButton";
+import Notifications from "./src/pages/notifications";
+
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
 
 const config = {
@@ -61,42 +63,47 @@ const NavBar = createBottomTabNavigator(
 	config
 );
 
-
-
-
-const SwitchNavigation = createStackNavigator(
+const StackNavigation = createStackNavigator(
 	{
-		
 		Login: {
 			screen: Login,
-			
 		},
 
 		Intro: {
 			screen: Intro,
 		},
 
-		
 		Config: {
 			screen: Config,
 			navigationOptions: {
-				title: 'Configurações',
+				title: "Configurações",
 				animationEnabled: true,
-				
+
 				headerShown: true,
-				headerTintColor: '#fff',
+				headerTintColor: "#fff",
 				headerStyle: {
-					backgroundColor: '#ca2929',
-				  },
-			}
-			
+					backgroundColor: "#ca2929",
+				},
+			},
 		},
 
+		Notifications: {
+			screen: Notifications,
+			navigationOptions: {
+				title: "Notificações",
+				animationEnabled: true,
+
+				headerShown: true,
+				headerTintColor: "#fff",
+				headerStyle: {
+					backgroundColor: "#ca2929",
+				},
+			},
+		},
 
 		Home: {
 			screen: NavBar,
 		},
-
 	},
 	{
 		defaultNavigationOptions: {
@@ -106,4 +113,4 @@ const SwitchNavigation = createStackNavigator(
 	}
 );
 
-export default createAppContainer(SwitchNavigation);
+export default createAppContainer(StackNavigation);

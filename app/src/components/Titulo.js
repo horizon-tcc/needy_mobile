@@ -21,17 +21,6 @@ export default function Titulo(props) {
 			>
 				{props.titulo}
 			</Text>
-
-			<TouchableOpacity>
-				<Text
-					style={{
-						fontWeight: "bold",
-						color: "#8c8c8c",
-					}}
-				>
-					{props.acaoTitulo}
-				</Text>
-			</TouchableOpacity>
 		</View>
 	);
 }
