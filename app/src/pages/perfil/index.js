@@ -105,7 +105,7 @@ export default class Profile extends React.Component {
 
 						<View style={styles.cardContainer}>
 
-							<TapGestureHandler>
+							<TapGestureHandler onHandlerStateChange={() => this.props.navigation.navigate('Achiv')}>
 
 
 								<View style={styles.optionOne}>

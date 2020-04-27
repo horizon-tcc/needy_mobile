@@ -13,8 +13,12 @@ import Perfil from "./src/pages/perfil/";
 import Config from "./src/pages/config/";
 import MapButton from "./src/components/MapButton";
 import Notifications from "./src/pages/notifications";
+import editProfile from './src/pages/editProfile';
+import editNotifications from './src/pages/editNotifications'
+import Achievements from './src/pages/achiv';
 
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
+
 
 const config = {
 	tabBarOptions: {
@@ -101,9 +105,22 @@ const StackNavigation = createStackNavigator(
 			},
 		},
 
+
+		editProfile: {
+			screen: editProfile,
+		},
+
+		editNotifications: {
+			screen: editNotifications,
+		},
+
 		Home: {
 			screen: NavBar,
 		},
+
+		Achiv: {
+			screen: Achievements,
+		}
 	},
 	{
 		defaultNavigationOptions: {

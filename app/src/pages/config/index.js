@@ -11,7 +11,7 @@ class Config extends React.Component {
         return (
             <View style={styles.container}>
                 
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('editProfile')}>
                     <View style={styles.configContainer}>
                         <View style={styles.iconContainer}>
                             <FontAwesome5 name= 'user-cog' color={'#ca2929'} size={23}/>
@@ -23,7 +23,7 @@ class Config extends React.Component {
                 </TouchableOpacity>
 
                 
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('editNotifications')}>
                     <View style={styles.configContainer}>
                         <View style={styles.iconContainer}>
                             <Image 
