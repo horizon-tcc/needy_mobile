@@ -106,6 +106,18 @@ const StackNavigation = createStackNavigator(
 
 		editProfile: {
 			screen: editProfile,
+
+			navigationOptions: {
+				title: "Editar Perfil",
+				animationEnabled: true,
+				
+
+				headerShown: true,
+				headerTintColor: "#fff",
+				headerStyle: {
+					backgroundColor: "#ca2929",
+				},
+			},
 		},
 
 		editNotifications: {
