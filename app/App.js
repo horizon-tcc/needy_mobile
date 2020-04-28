@@ -13,12 +13,11 @@ import Perfil from "./src/pages/perfil/";
 import Config from "./src/pages/config/";
 import MapButton from "./src/components/MapButton";
 import Notifications from "./src/pages/notifications";
-import editProfile from './src/pages/editProfile';
-import editNotifications from './src/pages/editNotifications'
-import Achievements from './src/pages/achiv';
+import editProfile from "./src/pages/editProfile";
+import editNotifications from "./src/pages/editNotifications";
+import Achievements from "./src/pages/achiv";
 
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
-
 
 const config = {
 	tabBarOptions: {
@@ -105,7 +104,6 @@ const StackNavigation = createStackNavigator(
 			},
 		},
 
-
 		editProfile: {
 			screen: editProfile,
 		},
@@ -120,7 +118,17 @@ const StackNavigation = createStackNavigator(
 
 		Achiv: {
 			screen: Achievements,
-		}
+			navigationOptions: {
+				title: "Conquistas",
+				animationEnabled: true,
+
+				headerShown: true,
+				headerTintColor: "#fff",
+				headerStyle: {
+					backgroundColor: "#ca2929",
+				},
+			},
+		},
 	},
 	{
 		defaultNavigationOptions: {
