@@ -161,33 +161,54 @@ class Login extends Component {
 
 	render() {
 		// validar = () => {
+		// 	axios({
+		// 		method: "post",
+		// 		url: "http://needy-api.herokuapp.com/login",
+		// 		data: {
+		// 			email: this.state.email.toString(),
+		// 			senha: this.state.senha.toString(),
+		// 		},
+		// 	}).then((response) => {
+		// 		if (response.data.token) {
+		// 			console.log(response.data.token);
+		// 			this.setState({
+		// 				token: response.data.token,
+		// 			});
+		// 			// this.props.navigation.navigate("Home");
+		// 		} else {
+		// 			Alert.alert(
+		// 				"Login Inválido",
+		// 				"Por favor insira um login válido!",
+		// 				[
+		// 					{
+		// 						text: "OK",
+		// 						onPress: () =>
+		// 							console.log("OK Pressed"),
+		// 					},
+		// 				],
+		// 				{ cancelable: false }
+		// 			);
+		// 		}
+		// 	}).catch = (e) => {
+		// 		console.log(e);
+		// 	};
+		// };
 
-		//       axios({
-		//             method: "post",
-		//             url: "http://needy-api.herokuapp.com/login",
-		//             data: {
-		//                   email: this.state.email.toString(),
-		//                   senha: this.state.senha.toString(),
-		//             },
-		//       }).then((response) => {
-		//             if (typeof response.data.sucess) {
-		//                   AsyncStorage.setItem("id", response.data.idUsuario);
-		//                   AsyncStorage.setItem("token", response.data.token);
-		//                   this.props.navigation.navigate("Home");
-		//             } else {
-		//                   Alert.alert(
-		//                         "Login Inválido",
-		//                         "Por favor insira um login válido!",
-		//                         [
-		//                               { text: "OK", onPress: () => console.log("OK Pressed") }
-		//                         ],
-		//                         { cancelable: false }
-		//                   );
-		//             }
-		//       }).catch = (e) => {
-		//             console.log(e);
-		//       };
-
+		// testeR = () => {
+		// 	axios({
+		// 		method: "post",
+		// 		url: "http://needy-api.herokuapp.com/login",
+		// 		data: {
+		// 			token: this.state.token,
+		// 		},
+		// 	}).then((response) => {
+		// 		if (response.data) {
+		// 		} else {
+		// 			console.log("ERRO NA REQUISIÇÃO");
+		// 		}
+		// 	}).catch = (e) => {
+		// 		console.log(e);
+		// 	};
 		// };
 
 		return (
@@ -353,7 +374,7 @@ class Login extends Component {
 										this.props.navigation.navigate(
 											"Home"
 										)
-									// validar()
+									// validar())
 								}
 							>
 								<Animated.View
