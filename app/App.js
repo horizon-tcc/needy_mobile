@@ -16,6 +16,8 @@ import Notifications from "./src/pages/notifications";
 import editProfile from "./src/pages/editProfile";
 import editNotifications from "./src/pages/editNotifications";
 import Achievements from "./src/pages/achiv";
+import Carteirinha from "./src/pages/carteirinha";
+import Ajuda from "./src/pages/ajuda";
 
 import { TouchableNativeFeedback } from "react-native-gesture-handler";
 
@@ -76,6 +78,34 @@ const StackNavigation = createStackNavigator(
 			screen: Intro,
 		},
 
+		Carteirinha: {
+			screen: Carteirinha,
+			navigationOptions: {
+				title: "Carteirinha",
+				animationEnabled: true,
+
+				headerShown: true,
+				headerTintColor: "#fff",
+				headerStyle: {
+					backgroundColor: "#ca2929",
+				},
+			},
+		},
+
+		Ajuda: {
+			screen: Ajuda,
+			navigationOptions: {
+				title: "Ajuda",
+				animationEnabled: true,
+
+				headerShown: true,
+				headerTintColor: "#fff",
+				headerStyle: {
+					backgroundColor: "#ca2929",
+				},
+			},
+		},
+
 		Config: {
 			screen: Config,
 			navigationOptions: {
@@ -110,7 +140,6 @@ const StackNavigation = createStackNavigator(
 			navigationOptions: {
 				title: "Editar Perfil",
 				animationEnabled: true,
-				
 
 				headerShown: true,
 				headerTintColor: "#fff",
