@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Dimensions, Text } from 'react-native';
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, AntDesign } from "@expo/vector-icons";
 import { withNavigation } from 'react-navigation';
 import PropTypes from 'prop-types';
 
@@ -18,7 +18,10 @@ class ConfigurationDefault extends React.Component {
         title: PropTypes.string,
         subtitle: PropTypes.bool,
         info: PropTypes.string, 
-        icon: PropTypes.element,       
+        icon: PropTypes.element,
+        hasRoute: PropTypes.bool.isRequired,
+        onPress: PropTypes.func,
+        arrow: PropTypes.bool,           
     }
 
     
@@ -28,13 +31,13 @@ class ConfigurationDefault extends React.Component {
     render() {
         const { width, height } = Dimensions.get('screen');
 
-        const {navigateTo,title,subtitle, info, icon} = this.props;
+        const {navigateTo,title,subtitle, info, icon, onPress, arrow, hasRoute} = this.props;
 
         console.log(subtitle)
 
         return (
             <View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate(navigateTo)}>
+                <TouchableOpacity onPress={hasRoute ? () => this.props.navigation.navigate(navigateTo) : onPress}>
                     <View style={{
                         backgroundColor: '#fff',
                         width: width,
@@ -85,6 +88,19 @@ class ConfigurationDefault extends React.Component {
                             paddingTop: 40,
 
                         }}> {subtitle ? info : ''} </Text>
+
+
+                            
+                        { arrow ? <AntDesign  
+                        name='arrow-right'
+                        size={23}
+                        color={'rgba(0,0,0,0.2)'}
+                        style={{
+                            position: 'absolute',
+                            marginTop: 25,
+                            right: 20,
+                            alignSelf: 'flex-end',
+                        }}/>  : null}
 
                     </View>
                 </TouchableOpacity>

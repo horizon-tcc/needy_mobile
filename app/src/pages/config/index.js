@@ -23,6 +23,7 @@ class Config extends React.Component {
 							size={23}
 						/>
 					}
+					hasRoute={true}
 					navigateTo={"editProfile"}
 				/>
 
@@ -30,6 +31,7 @@ class Config extends React.Component {
 					title={"Notificações"}
 					subtitle={true}
 					info={"Configurações de toque, Vibrar"}
+					hasRoute={true}
 					icon={
 						<Image
 							source={require("../../assets/images/geral/icons/bell.png")}
@@ -50,6 +52,7 @@ class Config extends React.Component {
 							size={23}
 						/>
 					}
+					hasRoute={true}
 					navigateTo={"Profile"}
 				/>
 
@@ -63,6 +66,7 @@ class Config extends React.Component {
 							size={23}
 						/>
 					}
+					hasRoute={true}
 					navigateTo={"Login"}
 				/>
 
@@ -86,6 +90,7 @@ class Config extends React.Component {
 							size={23}
 						/>
 					}
+					hasRoute={true}
 					navigateTo={"Ajuda"}
 				/>
 
@@ -98,6 +103,7 @@ class Config extends React.Component {
 							style={{ width: 23, height: 23 }}
 						/>
 					}
+					hasRoute={true}
 					navigateTo={"Profile"}
 				/>
 			</View>

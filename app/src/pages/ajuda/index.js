@@ -1,73 +1,81 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import { TapGestureHandler } from "react-native-gesture-handler";
-const data_ajuda = [
-	{
-		id: 1,
-		opcao: "FAQ",
-		tela: "Home",
-	},
-	{
-		id: 2,
-		opcao: "Fale Conosco",
-		tela: "Home",
-	},
-	{
-		id: 3,
-		opcao: "Termos e Política de Privacidade",
-		tela: "Home",
-	},
-	{
-		id: 4,
-		opcao: "Dados do Aplicativo",
-		tela: "Home",
-	},
-];
-
-function Ajuda({ opcao, tela }) {
+import { View, Text, FlatList, ToastAndroid } from "react-native";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import ConfigurationDefault from '../../components/ConfigurationDefault';
+import styles from './styles';
+function Ajuda() {
 	return (
-		<TapGestureHandler
-			onHandlerStateChange={() => this.props.navigation.navigate(tela)}
-		>
-			<View
-				style={{
-					backgroundColor: "#fff",
-					padding: 20,
-					borderBottomWidth: 0.5,
-					borderBottomColor: "#8c8c8c",
-
-					display: "flex",
-					flexDirection: "row",
-					justifyContent: "space-between",
-				}}
-			>
-				<Text
-					style={{
-						color: "#ca2929",
-						fontWeight: "bold",
-						fontSize: 15,
-					}}
-				>
-					{opcao}
-				</Text>
-				<AntDesign name="arrowright" size={18} color="#8c8c8c" />
-			</View>
-		</TapGestureHandler>
-	);
-}
-
-function help() {
-	return (
-		<View>
-			<FlatList
-				data={data_ajuda}
-				renderItem={({ item }) => (
-					<Ajuda opcao={item.opcao} tela={item.tela} />
-				)}
+		<View style={styles.container}>
+			<ConfigurationDefault 
+				
+				hasRoute={false}
+				onPress={() => ToastAndroid.show('Redirecionado para um site',ToastAndroid.SHORT)}
+				subtitle={false}
+				title={'FAQ'}
+				icon={	
+					<FontAwesome5
+						name="question-circle"
+						color={"#ca2929"}
+						size={23}
+					/>
+				}
 			/>
+
+			<ConfigurationDefault 
+				
+				hasRoute={false}
+				onPress={() => ToastAndroid.show('Redirecionado para uma tela com form',ToastAndroid.SHORT)}
+				subtitle={false}
+				title={'Fale Conosco'}
+				icon={	
+					<FontAwesome5
+						name="comments"
+						color={"#ca2929"}
+						size={23}
+					/>
+				}
+
+			/>
+
+			
+			<ConfigurationDefault 
+				
+				hasRoute={false}
+				onPress={() => ToastAndroid.show('Redirecionado para uma tela no app',ToastAndroid.SHORT)}
+				subtitle={false}
+				title={'Termos e Política de Privacidade'}
+				icon={	
+					<FontAwesome5
+						name="clipboard"
+						color={"#ca2929"}
+						size={23}
+					/>
+				}
+
+			/>
+			
+
+			
+			<ConfigurationDefault 
+				
+				hasRoute={false}
+				onPress={() => ToastAndroid.show('Redirecionado para uma tela com form',ToastAndroid.SHORT)}
+				subtitle={false}
+				title={'Dados do Aplicativo'}
+				icon={	
+					<FontAwesome5
+						name="info-circle"
+						color={"#ca2929"}
+						size={23}
+					/>
+				}
+
+			/>
+			
 		</View>
 	);
 }
 
-export default help;
+
+
+export default Ajuda;
