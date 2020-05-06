@@ -13,6 +13,7 @@ const editProfile = () => {
                 title={'foi carai'}
                 info = 'Endereço, E-mail, Privacidade'
                 subtitle= {true}
+                hasRoute={false}
                 icon = { <FontAwesome5 name='user-cog' color={'#ca2929'} size={23} />}
 
             />

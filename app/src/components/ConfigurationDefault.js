@@ -14,7 +14,7 @@ class ConfigurationDefault extends React.Component {
     }
 
     static propTypes = {
-        navigateTo: PropTypes.string.isRequired,
+        navigateTo: PropTypes.string,
         title: PropTypes.string,
         subtitle: PropTypes.bool,
         info: PropTypes.string, 
@@ -33,7 +33,6 @@ class ConfigurationDefault extends React.Component {
 
         const {navigateTo,title,subtitle, info, icon, onPress, arrow, hasRoute} = this.props;
 
-        console.log(subtitle)
 
         return (
             <View>
@@ -92,7 +91,7 @@ class ConfigurationDefault extends React.Component {
 
                             
                         { arrow ? <AntDesign  
-                        name='arrow-right'
+                        name='arrowright'
                         size={23}
                         color={'rgba(0,0,0,0.2)'}
                         style={{

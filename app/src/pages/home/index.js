@@ -11,85 +11,47 @@ import styles from "./styles";
 import Campanha from "../../components/Campanha";
 import Titulo from "./../../components/Titulo";
 import Notification from "./../../components/FlatListNotifications";
+import ConfigurationDefault from '../../components/ConfigurationDefault';
+import {AntDesign, FontAwesome5} from '@expo/vector-icons'
 
 export default class Home extends React.Component {
+
+
+
 	render() {
 		return (
 			<View style={styles.container}>
+				
+			<ScrollView>
+					
 				<ImageBackground
 					style={styles.imageBg}
 					source={require("./../../assets/images/telas/telaHome/bgHome.png")}
 				>
-					<ScrollView>
 						<View>
 							<Text style={styles.tituloApp}>Needy</Text>
 						</View>
 
-						<View>
-							<ScrollView>
-								<TouchableOpacity>
-									<View
-										style={{
-											backgroundColor: "#fff",
-											padding: 50,
-											width: 150,
-											borderRadius: 20,
-										}}
-									>
-										<Text>Opção</Text>
-									</View>
-								</TouchableOpacity>
-							</ScrollView>
-						</View>
-						<ScrollView
-							style={styles.campanhas}
-							horizontal={true}
-							scrollEventThrottle={16}
-							showsHorizontalScrollIndicator={false}
-						>
-							<Campanha
-								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
-							/>
-							<Campanha
-								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
-							/>
-							<Campanha
-								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
-							/>
-							<Campanha
-								imgURL={require("./../../assets/images/campanhas/banner_doacao_sangue.jpg")}
-							/>
-						</ScrollView>
-						<View
-							style={{
-								display: "flex",
-								flexDirection: "row",
-								justifyContent: "space-between",
-								alignItems: "center",
-							}}
-						>
-							<Titulo titulo="Notificações"></Titulo>
+						
+						<Campanha/>
+						
+						<ConfigurationDefault
+							title={'Notificações'}
+							hasRoute={true}
+							navigateTo={"Notifications"}
+							icon= {
+								<FontAwesome5 name="bell" size={23} color="#ca2929"/>
 
-							<TouchableOpacity
-								onPress={() =>
-									this.props.navigation.navigate(
-										"Notifications"
-									)
-								}
-							>
-								<Text
-									style={{
-										fontWeight: "bold",
-										color: "#8c8c8c",
-									}}
-								>
-									ver mais >
-								</Text>
-							</TouchableOpacity>
-						</View>
-						<Notification />
-					</ScrollView>
+							}
+							arrow={true}
+							subtitle={false}
+
+						/>
+					
+					<Notification />
 				</ImageBackground>
+				</ScrollView>
+
 			</View>
 		);
 	}

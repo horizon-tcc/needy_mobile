@@ -6,8 +6,8 @@ import styles from './styles';
 function Ajuda() {
 	return (
 		<View style={styles.container}>
+			
 			<ConfigurationDefault 
-				
 				hasRoute={false}
 				onPress={() => ToastAndroid.show('Redirecionado para um site',ToastAndroid.SHORT)}
 				subtitle={false}
