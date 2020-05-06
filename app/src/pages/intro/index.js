@@ -80,7 +80,6 @@ export default function Intro ({navigation}) {
             <AppIntroSlider
                 slides={slides}
                 showSkipButton= {true}
-                onSkip= {()=> this.props.navigation.navigate('Cadastro')}	
                 
                 renderSkipButton={this._renderSkipButton}
                 renderDoneButton={this._renderDoneButton}

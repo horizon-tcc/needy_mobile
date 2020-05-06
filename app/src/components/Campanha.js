@@ -46,7 +46,6 @@ export default class Campanha extends Component {
 	_renderItem({ item }) {
 		return (
 
-			<TouchableOpacity>
 				<View style={{
 
 					width: itemWidth,
@@ -149,7 +148,6 @@ export default class Campanha extends Component {
 
 
 				</View>
-			</TouchableOpacity>
 
 		);
 	}

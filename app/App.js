@@ -29,6 +29,8 @@ const config = {
 	},
 };
 
+console.disableYellowBox = true;
+
 const NavBar = createBottomTabNavigator(
 	{
 		Home: {

@@ -14,11 +14,25 @@ import Notification from "./../../components/FlatListNotifications";
 import ConfigurationDefault from '../../components/ConfigurationDefault';
 import {AntDesign, FontAwesome5} from '@expo/vector-icons'
 
+const _retrieveData = async () => {
+	try {
+	  const value = await AsyncStorage.getItem('TASKS');
+	  if (value !== null) {
+		// We have data!!
+		console.log(value);
+	  }
+	} catch (error) {
+	  // Error retrieving data
+	}
+  };
+
 export default class Home extends React.Component {
 
 
 
 	render() {
+		this._retrieveData;
+
 		return (
 			<View style={styles.container}>
 				

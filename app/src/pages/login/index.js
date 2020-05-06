@@ -10,6 +10,7 @@ import {
 	ImageBackground,
 	KeyboardAvoidingView,
 	AsyncStorage,
+	ToastAndroid
 } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
@@ -17,6 +18,15 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 
 const { width, height } = Dimensions.get("window");
+
+const _storeData = async () => {
+	try {
+		await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+		await console.log('foi carai');
+	} catch (error) {
+		// Error saving data
+	}
+};
 
 const {
 	Value,
@@ -159,57 +169,30 @@ class Login extends Component {
 		}
 	}
 
-	render() {
-		// validar = () => {
-		// 	axios({
-		// 		method: "post",
-		// 		url: "http://needy-api.herokuapp.com/login",
-		// 		data: {
-		// 			email: this.state.email.toString(),
-		// 			senha: this.state.senha.toString(),
-		// 		},
-		// 	}).then((response) => {
-		// 		if (response.data.token) {
-		// 			console.log(response.data.token);
-		// 			this.setState({
-		// 				token: response.data.token,
-		// 			});
-		// 			// this.props.navigation.navigate("Home");
-		// 		} else {
-		// 			Alert.alert(
-		// 				"Login Inválido",
-		// 				"Por favor insira um login válido!",
-		// 				[
-		// 					{
-		// 						text: "OK",
-		// 						onPress: () =>
-		// 							console.log("OK Pressed"),
-		// 					},
-		// 				],
-		// 				{ cancelable: false }
-		// 			);
-		// 		}
-		// 	}).catch = (e) => {
-		// 		console.log(e);
-		// 	};
-		// };
 
-		// testeR = () => {
-		// 	axios({
-		// 		method: "post",
-		// 		url: "http://needy-api.herokuapp.com/login",
-		// 		data: {
-		// 			token: this.state.token,
-		// 		},
-		// 	}).then((response) => {
-		// 		if (response.data) {
-		// 		} else {
-		// 			console.log("ERRO NA REQUISIÇÃO");
-		// 		}
-		// 	}).catch = (e) => {
-		// 		console.log(e);
-		// 	};
-		// };
+	validar = () => {
+		axios({
+			method: "post",
+			url: "http://needy-api.herokuapp.com/login",
+			data: {
+				email: this.state.email.toString(),
+				senha: this.state.senha.toString(),
+			},
+		}).then((response) => {
+			console.log(response.data.token);
+			this.setState({
+				token: response.data.token,
+			});
+			this.props.navigation.navigate("Home");
+
+		}).catch((error) => {
+			ToastAndroid.show('Login ou senha Inválidos', ToastAndroid.SHORT);
+		});
+	}
+
+
+	render() {
+
 
 		return (
 			<KeyboardAvoidingView style={styles.container} behavior="height">
@@ -371,10 +354,7 @@ class Login extends Component {
 							<TapGestureHandler
 								onHandlerStateChange={
 									() =>
-										this.props.navigation.navigate(
-											"Home"
-										)
-									// validar())
+										this.validar()
 								}
 							>
 								<Animated.View
