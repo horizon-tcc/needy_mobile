@@ -159,12 +159,12 @@ class Login extends Component {
 		if (this.state.eyeIcon.valueOf() == "eye") {
 			this.setState({
 				eyeIcon: "eye-slash",
-				inputType: true,
+				inputType: !this.state.inputType,
 			});
 		} else {
 			this.setState({
 				eyeIcon: "eye",
-				inputType: false,
+				inputType: !this.state.inputType,
 			});
 		}
 	}
@@ -289,7 +289,7 @@ class Login extends Component {
 								...StyleSheet.absoluteFill,
 								top: 80,
 								justifyContent: "center",
-								backgroundColor: "white",
+								backgroundColor: "transparent",
 							}}
 						>
 							<View style={styles.containerTitle}>
