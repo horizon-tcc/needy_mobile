@@ -22,6 +22,7 @@ import Ajuda from "./src/pages/ajuda";
 const Stack = createStackNavigator();
 const NavBar = createBottomTabNavigator();
 
+console.disableYellowBox = true;
 
 const BottomNav = () => {
 	return (
