@@ -10,7 +10,7 @@ import {
 	ImageBackground,
 	KeyboardAvoidingView,
 	AsyncStorage,
-	ToastAndroid
+	ToastAndroid,
 } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
@@ -18,15 +18,6 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 
 const { width, height } = Dimensions.get("window");
-
-const _storeData = async () => {
-	try {
-		await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
-		await console.log('foi carai');
-	} catch (error) {
-		// Error saving data
-	}
-};
 
 const {
 	Value,
@@ -73,6 +64,15 @@ function runTiming(clock, value, dest) {
 		state.position,
 	]);
 }
+
+const _storeData = async (token) => {
+	try {
+		await AsyncStorage.setItem("token", token);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 class Login extends Component {
 	constructor() {
 		super();
@@ -84,6 +84,7 @@ class Login extends Component {
 			height: height,
 			email: "",
 			senha: "",
+			token: null,
 		};
 
 		this.buttonOpacity = new Value(1);
@@ -169,7 +170,6 @@ class Login extends Component {
 		}
 	}
 
-
 	validar = () => {
 		axios({
 			method: "post",
@@ -178,22 +178,23 @@ class Login extends Component {
 				email: this.state.email.toString(),
 				senha: this.state.senha.toString(),
 			},
-		}).then((response) => {
-			console.log(response.data.token);
-			this.setState({
-				token: response.data.token,
+		})
+			.then((response) => {
+				this.setState({
+					token: response.data.token,
+				});
+				this.props.navigation.navigate("Home");
+				_storeData(this.state.token);
+			})
+			.catch((error) => {
+				ToastAndroid.show(
+					"Login ou senha Inválidos",
+					ToastAndroid.SHORT
+				);
 			});
-			this.props.navigation.navigate("Home");
-
-		}).catch((error) => {
-			ToastAndroid.show('Login ou senha Inválidos', ToastAndroid.SHORT);
-		});
-	}
-
+	};
 
 	render() {
-
-
 		return (
 			<KeyboardAvoidingView style={styles.container} behavior="height">
 				<ImageBackground
@@ -352,9 +353,8 @@ class Login extends Component {
 							</TapGestureHandler>
 
 							<TapGestureHandler
-								onHandlerStateChange={
-									() =>
-										this.validar()
+								onHandlerStateChange={() =>
+									this.validar()
 								}
 							>
 								<Animated.View
