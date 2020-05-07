@@ -19,14 +19,14 @@ import axios from "axios";
 
 const { width, height } = Dimensions.get("window");
 
-const _storeData = async () => {
-	try {
-		await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
-		await console.log('foi carai');
-	} catch (error) {
-		// Error saving data
-	}
-};
+	const _storeData = async () => {
+		try {
+			await AsyncStorage.setItem('@MySuperStore:key', 'I like to save it.');
+			await console.log('foi carai');
+		} catch (error) {
+			// Error saving data
+		}
+	};
 
 const {
 	Value,

@@ -60,7 +60,7 @@ export default function Intro ({navigation}) {
     _renderDoneButton = () => {
         return (
           <ScreenContainer>          
-              <TapGestureHandler onHandlerStateChange={()=> navigation.navigate('Home')}>
+              <TapGestureHandler onHandlerStateChange={()=> navigation.navigate('Login')}>
                 <View style={styles.buttonCircle}>
                     <Ionicons
                         name="md-checkmark"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Dimensions, Text } from 'react-native';
 import { FontAwesome5, AntDesign } from "@expo/vector-icons";
-import { withNavigation } from 'react-navigation';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 
 
@@ -116,5 +116,9 @@ class ConfigurationDefault extends React.Component {
 
 
 
-export default withNavigation(ConfigurationDefault);
+export  default function(props) {
+    const navigation = useNavigation();
+  
+    return <ConfigurationDefault {...props} navigation={navigation} />;
+  };
 

@@ -24,7 +24,7 @@ class Config extends React.Component {
 						/>
 					}
 					hasRoute={true}
-					navigateTo={"editProfile"}
+					navigateTo={"editPerfil"}
 				/>
 
 				<ConfigurationDefault
@@ -53,7 +53,7 @@ class Config extends React.Component {
 						/>
 					}
 					hasRoute={true}
-					navigateTo={"Profile"}
+					navigateTo={"Perfil"}
 				/>
 
 				<ConfigurationDefault
@@ -104,7 +104,7 @@ class Config extends React.Component {
 						/>
 					}
 					hasRoute={true}
-					navigateTo={"Profile"}
+					navigateTo={"Perfil"}
 				/>
 			</View>
 		);
