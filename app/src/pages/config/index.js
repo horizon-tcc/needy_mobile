@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, Share } from "react-native";
+import { View, Text, Image, Share ,AsyncStorage} from "react-native";
 import styles from "./styles";
 import {
 	TouchableHighlight,
@@ -9,6 +9,19 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import ConfigurationDefault from "../../components/ConfigurationDefault";
 
 class Config extends React.Component {
+	
+	async removeToken() {
+		try {
+			await AsyncStorage.removeItem("token");
+		} catch (error) {
+			console.log(error);
+			
+		}
+	}
+	signOut = () => {
+		this.removeToken();
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -66,8 +79,8 @@ class Config extends React.Component {
 							size={23}
 						/>
 					}
-					hasRoute={true}
-					navigateTo={"Login"}
+					hasRoute={false}
+					onPress={this.signOut}
 				/>
 
 				<Text

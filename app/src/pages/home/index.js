@@ -10,7 +10,6 @@ import {
 import styles from "./styles";
 
 import Campanha from "../../components/Campanha";
-import Titulo from "./../../components/Titulo";
 import Notification from "./../../components/FlatListNotifications";
 import ConfigurationDefault from "../../components/ConfigurationDefault";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
@@ -32,7 +31,6 @@ export default class Home extends React.Component {
 	render() {
 		_retrieveData();
 
-		this._retrieveData;
 
 		return (
 			<View style={styles.container}>
