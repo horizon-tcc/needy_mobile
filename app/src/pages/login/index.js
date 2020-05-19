@@ -16,7 +16,6 @@ import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
-import { AuthContext } from '../../../App';
 const { width, height } = Dimensions.get("window");
 
 const {
@@ -269,6 +268,11 @@ const Login = ({ navigation }) => {
 							placeholder="E-mail"
 							style={styles.textInput}
 							placeholderTextColor="rgba(0,0,0,0.4)"
+							textContentType='emailAddress'
+							value={email}
+							onChangeText={(text)=> {
+								setEmail(text)
+							}}
 
 						></TextInput>
 
@@ -287,7 +291,8 @@ const Login = ({ navigation }) => {
 							textContentType="password"
 							value={senha}
 							onChangeText={(text) => {
-								senha = text;
+								setSenha(text)
+								console.log(senha);
 							}
 							}
 						></TextInput>
@@ -353,11 +358,11 @@ const Login = ({ navigation }) => {
 const toggleEye = () => {
 	if (eyeIcon.valueOf() == "eye") {
 
-		eyeIcon = "eye-slash";
-		inputType = !inputType;
+		setEyeIcon("eye-slash") ;
+		setInputType(!inputType) ;
 	} else {
-		eyeIcon = "eye";
-		inputType = !inputType;
+		setEyeIcon("eye");
+		setInputType( !inputType);
 
 	}
 }

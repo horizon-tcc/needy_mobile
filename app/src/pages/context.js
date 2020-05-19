@@ -1,3 +1,4 @@
 import {React} from 'react';
 
-export const AuthContext = React.createContext('test');
+const AuthContext = React.createContext('');
+
