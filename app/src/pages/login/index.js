@@ -16,6 +16,7 @@ import Animated, { Easing } from "react-native-reanimated";
 import { TapGestureHandler, State } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
+import { AuthContext } from "../../../App";
 const { width, height } = Dimensions.get("window");
 
 const {
@@ -35,34 +36,6 @@ const {
 	Extrapolate,
 } = Animated;
 
-function runTiming(clock, value, dest) {
-	const state = {
-		finished: new Value(0),
-		position: new Value(0),
-		time: new Value(0),
-		frameTime: new Value(0),
-	};
-
-	const config = {
-		duration: 1000,
-		toValue: new Value(0),
-		easing: Easing.inOut(Easing.ease),
-	};
-
-	return block([
-		cond(clockRunning(clock), 0, [
-			set(state.finished, 0),
-			set(state.time, 0),
-			set(state.position, value),
-			set(state.frameTime, 0),
-			set(config.toValue, dest),
-			startClock(clock),
-		]),
-		timing(clock, state, config),
-		cond(state.finished, debug("stop clock", stopClock(clock))),
-		state.position,
-	]);
-}
 
 const _storeData = async (token) => {
 	try {
@@ -77,82 +50,51 @@ const _storeData = async (token) => {
 
  
 const Login = ({ navigation }) => {
-	const [eyeIcon, setEyeIcon]  = useState("eye-slash");
-	const [inputType, setInputType] = useState(true);
-	const [email, setEmail] = useState("");
-	const [senha, setSenha] = useState("");
-	const [token, setToken] = useState(null);
-   
+	const [eyeIcon, setEyeIcon]  = React.useState("eye-slash");
+	const [inputType, setInputType] = React.useState(true);
+	const [email, setEmail] = React.useState("");
+	const [senha, setSenha] = React.useState("");
+	const [token, setToken] = React.useState(null);
+	const {logar} = React.useContext(AuthContext); 
 
 
-	const buttonOpacity = new Value(1);
-
-	const onStateChange = event([
-		{
-			nativeEvent: ({ state }) =>
-				block([
-					cond(
-						eq(state, State.END),
-						set(
-							buttonOpacity,
-							runTiming(new Clock(), 1, 0)
-						)
-					),
-				]),
+	
+const validar = () => {
+	axios({
+		method: "post",
+		url: "http://needy-api.herokuapp.com/login",
+		data: {
+			email: email.toString(),
+			senha: senha.toString(),
 		},
-	]);
+	})
+		.then((response) => {
+			setToken(response.data.token),
 
-	const onCloseState = event([
-		{
-			nativeEvent: ({ state }) =>
-				block([
-					cond(
-						eq(state, State.END),
-						set(
-							buttonOpacity,
-							runTiming(new Clock(), 0, 1)
-						)
-					),
-				]),
-		},
-	]);
+				_storeData(token);
+				logar();
+			})
+		.catch((error) => {
+			console.log(error);
+			ToastAndroid.show(
+				"Login ou senha Inválidos",
+				ToastAndroid.SHORT
+			);
+		});
+};
 
-	const buttonY = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [100, 0],
-		extrapolate: Extrapolate.CLAMP,
-	});
+	
+const toggleEye = () => {
+	if (inputType  == false ) {
 
-	const bgX = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [-width * 1.5, 0],
-		extrapolate: Extrapolate.CLAMP,
-	});
+		setEyeIcon("eye-slash") ;
+		setInputType(!inputType) ;
+	} else {
+		setEyeIcon("eye");
+		setInputType( !inputType);
 
-	const textInputZindex = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [1, -1],
-		extrapolate: Extrapolate.CLAMP,
-	});
-
-	const textInputX = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [0, 400],
-		extrapolate: Extrapolate.CLAMP,
-	});
-
-	const textInputOpacity = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [1, 0],
-		extrapolate: Extrapolate.CLAMP,
-	});
-
-	const rotateCross = interpolate(buttonOpacity, {
-		inputRange: [0, 1],
-		outputRange: [180, 360],
-		extrapolate: Extrapolate.CLAMP,
-	});
-
+	}
+}
 	return (
 
 		<KeyboardAvoidingView style={styles.container} behavior="height">
@@ -160,93 +102,11 @@ const Login = ({ navigation }) => {
 				style={styles.container}
 				source={require("../../assets/images/telas/telaLogin/bgLogin.png")}
 			>
-				<Animated.View
-					style={{
-						...StyleSheet.absoluteFill,
-						transform: [{ translateX: bgX }],
-					}}
-				>
-					<Image
-						source={require("../../assets/images/telas/telaLogin/bg2.png")}
-						style={{
-							flex: 1,
-							height: null,
-							width: null,
-						}}
-					/>
-				</Animated.View>
-				<View
-					style={{
-						height: height / 1.7,
-						justifyContent: "flex-end",
-					}}
-				>
-					<TapGestureHandler
-						onHandlerStateChange={onStateChange}
-					>
-						<Animated.View
-							style={{
-								...styles.button,
-								opacity: buttonOpacity,
-								transform: [
-									{
-										translateY: buttonY,
-									},
-								],
-							}}
-						>
-							<Text
-								style={{
-									fontSize: 20,
-									fontWeight: "bold",
-									color: "#ca2929",
-								}}
-							>
-								JÁ SOU DOADOR!
-								</Text>
-						</Animated.View>
-					</TapGestureHandler>
+				
+				<View>
 
-					<TapGestureHandler
-						onHandlerStateChange={() =>
-							navigation.navigate("Intro")
-						}
-					>
-						<Animated.View
-							style={{
-								...styles.button,
-								backgroundColor: "#ca2929",
-								opacity: buttonOpacity,
-								transform: [
-									{
-										translateY: buttonY,
-									},
-								],
-							}}
-						>
-							<Text
-								style={{
-									fontSize: 20,
-									fontWeight: "bold",
-									color: "white",
-								}}
-							>
-								COMO DOAR?
-								</Text>
-						</Animated.View>
-					</TapGestureHandler>
-
-					<Animated.View
+					<View
 						style={{
-							zIndex: textInputZindex,
-							opacity: textInputOpacity,
-							transform: [
-								{
-									translateX: textInputX,
-								},
-							],
-							height: height / 2,
-							...StyleSheet.absoluteFill,
 							top: 80,
 							justifyContent: "center",
 							backgroundColor: "transparent",
@@ -269,10 +129,11 @@ const Login = ({ navigation }) => {
 							style={styles.textInput}
 							placeholderTextColor="rgba(0,0,0,0.4)"
 							textContentType='emailAddress'
-							value={email}
 							onChangeText={(text)=> {
 								setEmail(text)
 							}}
+							value={email}
+					
 
 						></TextInput>
 
@@ -292,7 +153,7 @@ const Login = ({ navigation }) => {
 							value={senha}
 							onChangeText={(text) => {
 								setSenha(text)
-								console.log(senha);
+						
 							}
 							}
 						></TextInput>
@@ -332,64 +193,34 @@ const Login = ({ navigation }) => {
 						</TapGestureHandler>
 
 						<TapGestureHandler
-							onHandlerStateChange={onCloseState}
+							onHandlerStateChange={()=> {
+								navigation.navigate(
+									"Intro"
+								)
+							}}
 						>
 							<Animated.View
 								style={styles.closeButton}
 							>
-								<Animated.Text
+								<Text
 									style={{
 										fontSize: 18,
 										color: "rgba(0,0,0,0.3)",
 										fontWeight: "bold",
 									}}
 								>
-									VOLTAR
-									</Animated.Text>
+									TORNE-SE UM DOADOR
+									</Text>
 							</Animated.View>
 						</TapGestureHandler>
-					</Animated.View>
+					</View>
 				</View>
 			</ImageBackground>
 		</KeyboardAvoidingView>
 	);
 }
 
-const toggleEye = () => {
-	if (eyeIcon.valueOf() == "eye") {
 
-		setEyeIcon("eye-slash") ;
-		setInputType(!inputType) ;
-	} else {
-		setEyeIcon("eye");
-		setInputType( !inputType);
-
-	}
-}
-
-const validar = () => {
-	axios({
-		method: "post",
-		url: "http://needy-api.herokuapp.com/login",
-		data: {
-			email: email.toString(),
-			senha: senha.toString(),
-		},
-	})
-		.then((response) => {
-			token = response.data.token,
-
-				_storeData(token);
-			const { logar } = React.useContext(AuthContext);
-		})
-		.catch((error) => {
-			console.log(error);
-			ToastAndroid.show(
-				"Login ou senha Inválidos",
-				ToastAndroid.SHORT
-			);
-		});
-};
 
 
 
@@ -433,7 +264,7 @@ const styles = StyleSheet.create({
 	containerTitle: {
 		flex: 1,
 		height: 100,
-		bottom: 130,
+		bottom: 200,
 	},
 
 	buttonEntrar: {

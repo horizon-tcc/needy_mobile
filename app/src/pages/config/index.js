@@ -7,22 +7,21 @@ import {
 } from "react-native-gesture-handler";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ConfigurationDefault from "../../components/ConfigurationDefault";
+import { AuthContext } from "../../../App";
 
-class Config extends React.Component {
-	
-	async removeToken() {
+const Config = ({navigation}) => {
+	const {deslogar} = React.useContext(AuthContext);
+
+
+	const  _signOut =  async () => {
 		try {
-			await AsyncStorage.removeItem("token");
+			await AsyncStorage.removeItem('token');
+			deslogar();
+			console.log('DESLOGADO')
 		} catch (error) {
-			console.log(error);
 			
 		}
 	}
-	signOut = () => {
-		this.removeToken();
-	}
-
-	render() {
 		return (
 			<View style={styles.container}>
 				<ConfigurationDefault
@@ -80,7 +79,9 @@ class Config extends React.Component {
 						/>
 					}
 					hasRoute={false}
-					onPress={this.signOut}
+					onPress={() =>{
+					
+						_signOut()}}
 				/>
 
 				<Text
@@ -121,7 +122,6 @@ class Config extends React.Component {
 				/>
 			</View>
 		);
-	}
 }
 
 export default Config;

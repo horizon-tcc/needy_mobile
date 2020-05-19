@@ -14,23 +14,10 @@ import Notification from "./../../components/FlatListNotifications";
 import ConfigurationDefault from "../../components/ConfigurationDefault";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 
-const _retrieveData = async () => {
-	try {
-		const value = await AsyncStorage.getItem("token");
-		if (value !== null) {
-			// We have data!!
-			console.log("RESULTADO " + value);
-		}
-	} catch (error) {
-		// Error retrieving data
-		console.log(error);
-	}
-};
 
 export default class Home extends React.Component {
 	render() {
-		_retrieveData();
-
+		
 
 		return (
 			<View style={styles.container}>
