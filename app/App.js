@@ -96,7 +96,8 @@ export default App = () => {
 
 
 			} else {
-				setUserLogged(false);
+				console.log('usuário deslogado');
+				
 			}
 		} catch (error) {
 			// Error retrieving data

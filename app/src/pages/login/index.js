@@ -55,9 +55,12 @@ const Login = ({ navigation }) => {
 	const [email, setEmail] = React.useState("");
 	const [senha, setSenha] = React.useState("");
 	const [token, setToken] = React.useState(null);
-	const {logar} = React.useContext(AuthContext); 
+	const {logar} = React.useContext(AuthContext); 	
 
-
+	React.useEffect(() => {
+		
+		
+	})
 	
 const validar = () => {
 	axios({
@@ -69,7 +72,8 @@ const validar = () => {
 		},
 	})
 		.then((response) => {
-			setToken(response.data.token),
+				setToken(response.data.token),
+				 
 
 				_storeData(token);
 				logar();
