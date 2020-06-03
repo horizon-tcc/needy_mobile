@@ -37,68 +37,68 @@ const {
 } = Animated;
 
 
-const _storeData = async (token) => {
-	try {
 
-
-		await AsyncStorage.setItem("token", token);
-
-	} catch (error) {
-		console.log(error);
-	}
-};
-
- 
 const Login = ({ navigation }) => {
-	const [eyeIcon, setEyeIcon]  = React.useState("eye-slash");
+	const [eyeIcon, setEyeIcon] = React.useState("eye-slash");
 	const [inputType, setInputType] = React.useState(true);
 	const [email, setEmail] = React.useState("");
 	const [senha, setSenha] = React.useState("");
 	const [token, setToken] = React.useState(null);
-	const {logar} = React.useContext(AuthContext); 	
+	const { logar } = React.useContext(AuthContext);
 
 	React.useEffect(() => {
-		
-		
-	})
-	
-const validar = () => {
-	axios({
-		method: "post",
-		url: "http://needy-api.herokuapp.com/login",
-		data: {
-			email: email.toString(),
-			senha: senha.toString(),
-		},
-	})
-		.then((response) => {
-				setToken(response.data.token),
-				 
 
-				_storeData(token);
-				logar();
-			})
-		.catch((error) => {
+
+	})
+
+
+
+	const _storeData = async (token) => {
+		try {
+
+			await AsyncStorage.setItem("token", token);
+
+		} catch (error) {
 			console.log(error);
-			ToastAndroid.show(
-				"Login ou senha Inválidos",
-				ToastAndroid.SHORT
-			);
-		});
-};
+		}
+	};
 
-	
-const toggleEye = () => {
-	if (inputType  == false ) {
+	const validar = () => {
+		axios({
+			method: "post",
+			url: "http://needy-api.herokuapp.com/login",
+			data: {
+				email: email.toString(),
+				senha: senha.toString(),
+			},
+		})
+			.then((response) => {
+				_storeData(response.data.token);
+				logar();
+				
 
-		setEyeIcon("eye-slash") ;
-		setInputType(!inputType) ;
-	} else {
-		setEyeIcon("eye");
-		setInputType( !inputType);
+			})
+			.catch((error) => {
+				console.log(error);
+				ToastAndroid.show(
+					"Login ou senha Inválidos",
+					ToastAndroid.SHORT
+				);
+			});
+	};
 
+
+	const toggleEye = () => {
+		if (inputType == false) {
+
+			setEyeIcon("eye-slash");
+			setInputType(!inputType);
+		} else {
+			setEyeIcon("eye");
+			setInputType(!inputType);
+
+		}
 	}
-}
 	return (
 
 		<KeyboardAvoidingView style={styles.container} behavior="height">
@@ -106,7 +106,7 @@ const toggleEye = () => {
 				style={styles.container}
 				source={require("../../assets/images/telas/telaLogin/bgLogin.png")}
 			>
-				
+
 				<View>
 
 					<View
@@ -133,11 +133,11 @@ const toggleEye = () => {
 							style={styles.textInput}
 							placeholderTextColor="rgba(0,0,0,0.4)"
 							textContentType='emailAddress'
-							onChangeText={(text)=> {
+							onChangeText={(text) => {
 								setEmail(text)
 							}}
 							value={email}
-					
+
 
 						></TextInput>
 
@@ -157,7 +157,7 @@ const toggleEye = () => {
 							value={senha}
 							onChangeText={(text) => {
 								setSenha(text)
-						
+
 							}
 							}
 						></TextInput>
@@ -197,7 +197,7 @@ const toggleEye = () => {
 						</TapGestureHandler>
 
 						<TapGestureHandler
-							onHandlerStateChange={()=> {
+							onHandlerStateChange={() => {
 								navigation.navigate(
 									"Intro"
 								)

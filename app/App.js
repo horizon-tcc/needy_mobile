@@ -96,7 +96,7 @@ export default App = () => {
 
 
 			} else {
-				console.log('usuário deslogado');
+				setUserLogged(false);
 				
 			}
 		} catch (error) {
@@ -293,4 +293,3 @@ export default App = () => {
 }
 export { AuthContext };
 
-export const UserConsumer = AuthContext.Consumer;
