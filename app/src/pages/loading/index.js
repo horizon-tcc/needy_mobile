@@ -69,6 +69,22 @@ export default class Loading extends Component {
         duration: 500,
 
       }),
+
+      Animated.timing(this.state.animation, {
+        toValue: 1,
+        duration: 500,
+
+      }),
+
+      
+      Animated.delay(500),
+      Animated.timing(this.state.animation, {
+        toValue: 0,
+        duration: 500,
+
+      }),
+
+
     ]).start();
 
   };
