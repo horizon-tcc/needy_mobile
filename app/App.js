@@ -128,7 +128,7 @@ export default App = () => {
 		setInterval(() => {
 			setIsLoading(!isLoading);
 
-		}, 500);
+		}, 2000);
 	}, []);
 
 

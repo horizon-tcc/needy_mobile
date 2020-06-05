@@ -74,7 +74,10 @@ const Login = ({ navigation }) => {
 		})
 			.then((response) => {
 				_storeData(response.data.token);
+				setToken(response.data.token);
 				logar();
+
+
 				
 
 			})
