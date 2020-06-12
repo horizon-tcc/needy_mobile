@@ -23,10 +23,10 @@ export default class Home extends React.Component {
 
 	_getToken = async () => {
 		try {
-		  const tokenKarai = await AsyncStorage.getItem('token');
-		  if (value !== null) {
-		    console.log(tokenKarai);
-		  }
+			const tokenKarai = await AsyncStorage.getItem('token');
+			if (value !== null) {
+			console.log(tokenKarai);
+			}
 		} catch (error) {
 			console.log("ERRO:" + error);
 		}

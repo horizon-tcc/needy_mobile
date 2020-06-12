@@ -16,6 +16,7 @@ import { TapGestureHandler } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import { AuthContext } from "../../../App";
+import base64 from 'base-64';
 const { width, height } = Dimensions.get("window");
 
 
@@ -29,18 +30,27 @@ const Login = ({ navigation }) => {
 
 	const _storeData = async (token) => {
 		try {
-		   	await AsyncStorage.setItem("token", token);
-		    
-			const parts = token.split('.');
-			const id = parts[1].toString()
-			const id_obj = JSON.stringfy(id)
-			console.log(id_obj);
-
-		    	await AsyncStorage.setItem("id", id_obj);
+		    await AsyncStorage.setItem("token", token);
+	 
+		    const parts = token.split('.');
+		    const payload = parts[1];
+		    const payload_decoded = base64.decode(payload);
+	 
+		    console.log("[1] payload_decoded: " + payload_decoded);
+		    const payload_semEspaco = payload_decoded.trim()
+		    console.log("[2] PAYLOAD SEM ESPAÇO : " + payload_semEspaco + "FIM");
+		    const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
+		    console.log("NEW JSON:" + newJSON + "FIM");
+	 
+		    const id = newJSON.idUsuario;
+		    console.log("[6] AQUI TÁ O ID: " + id);
+			
+		    await AsyncStorage.setItem("id", id);
+		    console.log(await AsyncStorage.getItem("id"));
 		} catch (error) {
 		    console.log(error);
 		}
-	};
+	 };
 
 	const validar = () => {
 		axios({

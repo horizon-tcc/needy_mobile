@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { View, SafeAreaView, Text, Image } from "react-native";
+import { View, SafeAreaView, Text, Image, AsyncStorage } from "react-native";
 import styles from "./styles";
 import {
 	TouchableOpacity,
@@ -11,19 +11,40 @@ import { Tooltip } from "react-native-elements";
 import { FontAwesome5 } from "@expo/vector-icons";
 import api from './../../services/api';
 
-const Profile = () =>  {
+const Profile = ({navigation}) =>  {
 
-	const [dataUser, setDataUser] = useState({});
+	// const [dataUser, setDataUser] = useState({});
 
-	useEffect(() => {
-		api.get("doadores", {
-			headers: {
-				'Authorization': `Bearer`
-			}
-		}).then(response => {
-			setDataUser(...response.data);
-		})
-	}, [])
+	const checkIfLogged = async () => {
+		try {
+		    const value = await AsyncStorage.getItem("token");
+		    const id = await AsyncStorage.getItem("id");
+		    if (value !== null) {
+			   // We have data!!
+			   console.log("RESULTADO " + value);
+			   console.log("ID " + id);
+		    } else {
+			 console.log('não tem token guardado');
+		    }
+		} catch (error) {
+		    // Error retrieving data
+		    console.log(error);
+		}
+  
+	 }
+  
+	 checkIfLogged();
+
+
+	// useEffect(() => {
+	// 	api.get("doadores", {
+	// 		headers: {
+	// 			'Authorization': `Bearer`
+	// 		}
+	// 	}).then(response => {
+	// 		setDataUser(...response.data);
+	// 	})
+	// }, [])
 
 	return (
 		<View style={styles.container}>
@@ -40,7 +61,7 @@ const Profile = () =>  {
 					<View style={styles.editBtn}>
 						<TouchableOpacity
 							onPress={() =>
-								this.props.navigation.navigate(
+								navigation.navigate(
 									"Config"
 								)
 							}

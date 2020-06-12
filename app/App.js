@@ -89,7 +89,12 @@ export default App = () => {
 			const value = await AsyncStorage.getItem("token");
 			if (value !== null) {
 				// We have data!!
-				console.log("RESULTADO " + value);
+				console.log(`
+					
+					TOKEN:
+					${value}
+
+				`);
 				
 				setToken(value);
 				setUserLogged(true);
