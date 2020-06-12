@@ -15,10 +15,25 @@ import ConfigurationDefault from "../../components/ConfigurationDefault";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 
 
-export default class Home extends React.Component {
-	render() {
-		
 
+
+
+export default class Home extends React.Component {
+	
+
+	_getToken = async () => {
+		try {
+		  const tokenKarai = await AsyncStorage.getItem('token');
+		  if (value !== null) {
+		    console.log(tokenKarai);
+		  }
+		} catch (error) {
+			console.log("ERRO:" + error);
+		}
+	};
+
+	render() {
+	
 		return (
 			<View style={styles.container}>
 				<ScrollView>

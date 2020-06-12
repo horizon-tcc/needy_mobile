@@ -1,10 +1,9 @@
 // IMPORTS
-import React, { Component, useContext, useState } from "react";
+import React from "react";
 import {
 	View,
 	Text,
 	StyleSheet,
-	Image,
 	Dimensions,
 	TextInput,
 	ImageBackground,
@@ -12,54 +11,34 @@ import {
 	AsyncStorage,
 	ToastAndroid,
 } from "react-native";
-import Animated, { Easing } from "react-native-reanimated";
-import { TapGestureHandler, State } from "react-native-gesture-handler";
+import Animated from "react-native-reanimated";
+import { TapGestureHandler } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import axios from "axios";
 import { AuthContext } from "../../../App";
 const { width, height } = Dimensions.get("window");
 
-const {
-	Value,
-	event,
-	block,
-	cond,
-	eq,
-	set,
-	Clock,
-	startClock,
-	stopClock,
-	debug,
-	timing,
-	clockRunning,
-	interpolate,
-	Extrapolate,
-} = Animated;
-
-
 
 const Login = ({ navigation }) => {
+
 	const [eyeIcon, setEyeIcon] = React.useState("eye-slash");
 	const [inputType, setInputType] = React.useState(true);
 	const [email, setEmail] = React.useState("");
 	const [senha, setSenha] = React.useState("");
-	const [token, setToken] = React.useState(null);
 	const { logar } = React.useContext(AuthContext);
-
-	React.useEffect(() => {
-
-
-	})
-
-
 
 	const _storeData = async (token) => {
 		try {
+		   	await AsyncStorage.setItem("token", token);
+		    
+			const parts = token.split('.');
+			const id = parts[1].toString()
+			const id_obj = JSON.stringfy(id)
+			console.log(id_obj);
 
-			await AsyncStorage.setItem("token", token);
-
+		    	await AsyncStorage.setItem("id", id_obj);
 		} catch (error) {
-			console.log(error);
+		    console.log(error);
 		}
 	};
 
@@ -72,28 +51,21 @@ const Login = ({ navigation }) => {
 				senha: senha.toString(),
 			},
 		})
-			.then((response) => {
-				_storeData(response.data.token);
-				setToken(response.data.token);
-				logar();
-
-
-				
-
-			})
-			.catch((error) => {
-				console.log(error);
-				ToastAndroid.show(
-					"Login ou senha Inválidos",
-					ToastAndroid.SHORT
-				);
-			});
+		.then((response) => {
+			_storeData(response.data.token);
+			logar();
+		})
+		.catch((error) => {
+			console.log(error);
+			ToastAndroid.show(
+				"Login ou senha Inválidos",
+				ToastAndroid.SHORT
+			);
+		});
 	};
-
 
 	const toggleEye = () => {
 		if (inputType == false) {
-
 			setEyeIcon("eye-slash");
 			setInputType(!inputType);
 		} else {
