@@ -28,25 +28,25 @@ const Login = ({ navigation }) => {
 	const [senha, setSenha] = React.useState("");
 	const { logar } = React.useContext(AuthContext);
 
+	const _storeId = async (id) => {
+		try {
+			console.log("ID DENTRO DA FUNÇÃO: " + id);
+			await AsyncStorage.setItem("id", id)
+		} catch (error) {
+			console.log(error);	
+		}
+	}
+
 	const _storeData = async (token) => {
 		try {
 		    await AsyncStorage.setItem("token", token);
 	 
-		    const parts = token.split('.');
-		    const payload = parts[1];
-		    const payload_decoded = base64.decode(payload);
-	 
-		    console.log("[1] payload_decoded: " + payload_decoded);
-		    const payload_semEspaco = payload_decoded.trim()
-		    console.log("[2] PAYLOAD SEM ESPAÇO : " + payload_semEspaco + "FIM");
-		    const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
-		    console.log("NEW JSON:" + newJSON + "FIM");
-	 
-		    const id = newJSON.idUsuario;
-		    console.log("[6] AQUI TÁ O ID: " + id);
+		//     const parts = token.split('.');
+		//     const payload = parts[1];
+		//     const payload_decoded = base64.decode(payload);
+		//     const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
+		//     const id = newJSON.idUsuario;
 			
-		    await AsyncStorage.setItem("id", id);
-		    console.log(await AsyncStorage.getItem("id"));
 		} catch (error) {
 		    console.log(error);
 		}

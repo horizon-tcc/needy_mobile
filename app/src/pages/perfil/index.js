@@ -10,24 +10,37 @@ import ProgressCircle from "react-native-progress-circle";
 import { Tooltip } from "react-native-elements";
 import { FontAwesome5 } from "@expo/vector-icons";
 import api from './../../services/api';
+import base64 from 'base-64';
+import axios from "axios";
 
 const Profile = ({navigation}) =>  {
 
-	// const [dataUser, setDataUser] = useState({});
+	const [dataUser, setDataUser] = useState({});
+	const [id, setId] = useState();
+	const [token, setToken] = useState();
 
 	const checkIfLogged = async () => {
 		try {
-		    const value = await AsyncStorage.getItem("token");
-		    const id = await AsyncStorage.getItem("id");
-		    if (value !== null) {
-			   // We have data!!
-			   console.log("RESULTADO " + value);
-			   console.log("ID " + id);
-		    } else {
-			 console.log('não tem token guardado');
-		    }
+		    	const token = await AsyncStorage.getItem("token");
+			if (token !== null) {
+				
+				const parts = token.split('.');
+				const payload = parts[1];
+				const payload_decoded = base64.decode(payload);
+				const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
+				
+				setId(String(newJSON.idUsuario));
+				setToken(String(token));
+
+				console.log(`
+					ID: ${id}
+					TOKEN: ${token}
+				`);
+
+			} else {
+				console.log('não tem token guardado');
+			}
 		} catch (error) {
-		    // Error retrieving data
 		    console.log(error);
 		}
   
@@ -35,16 +48,17 @@ const Profile = ({navigation}) =>  {
   
 	 checkIfLogged();
 
-
-	// useEffect(() => {
-	// 	api.get("doadores", {
-	// 		headers: {
-	// 			'Authorization': `Bearer`
-	// 		}
-	// 	}).then(response => {
-	// 		setDataUser(...response.data);
-	// 	})
-	// }, [])
+	 useEffect(() => {
+		api.get(`doadores/${id}`, {
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		}).then(response => {
+			setDataUser(response.data);
+		}).catch(error => {
+			console.log("ERRO AXIOS: " + error)
+		});
+	 }, [])
 
 	return (
 		<View style={styles.container}>
@@ -76,7 +90,7 @@ const Profile = ({navigation}) =>  {
 
 					<View style={styles.contentDiv}>
 						<Text style={styles.welcomeText}>
-							Olá, Manocchio
+							Olá, {dataUser.nomeDoador}
 						</Text>
 
 						<View style={styles.line} />
