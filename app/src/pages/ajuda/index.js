@@ -3,7 +3,7 @@ import { View, Text, FlatList, ToastAndroid, Linking } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ConfigurationDefault from '../../components/ConfigurationDefault';
 import styles from './styles';
-function Ajuda() {
+function Ajuda({navigation}) {
 	return (
 		<View style={styles.container}>
 			
@@ -41,7 +41,7 @@ function Ajuda() {
 			<ConfigurationDefault 
 				
 				hasRoute={false}
-				onPress={() => ToastAndroid.show('Redirecionado para uma tela no app',ToastAndroid.SHORT)}
+				onPress={() => navigation.navigate('Termo')}
 				subtitle={false}
 				title={'Termos e Política de Privacidade'}
 				icon={	

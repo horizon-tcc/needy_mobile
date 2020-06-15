@@ -18,7 +18,8 @@ import editNotifications from "./src/pages/editNotifications";
 import Achievements from "./src/pages/achiv";
 import Carteirinha from "./src/pages/carteirinha";
 import Ajuda from "./src/pages/ajuda";
-import Loading from './src/pages/loading/index'
+import Loading from './src/pages/loading/index';
+import Termo from './src/pages/termos/';
 
 const Stack = createStackNavigator();
 const NavBar = createBottomTabNavigator();
@@ -275,6 +276,21 @@ export default App = () => {
 									},
 								}}
 							/>
+
+							<Stack.Screen
+								name="Termo"
+								component={Termo}
+								options={{
+									title: "Termo",
+									animationEnabled: true,
+
+									headerShown: true,
+									headerTintColor: "#fff",
+									headerStyle: {
+										backgroundColor: "#ca2929",
+									},
+								}}
+							/>	
 
 						</>
 					) : (
