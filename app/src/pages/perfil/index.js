@@ -33,8 +33,8 @@ const Profile = ({navigation}) =>  {
 				setToken(String(token));
 
 				console.log(`
-					ID: ${id}
-					TOKEN: ${token}
+					ID: /${id}/
+					TOKEN: /${token}/
 				`);
 
 			} else {
@@ -55,6 +55,7 @@ const Profile = ({navigation}) =>  {
 			}
 		}).then(response => {
 			setDataUser(response.data);
+			console.log(response.data);
 		}).catch(error => {
 			console.log("ERRO AXIOS: " + error)
 		});
