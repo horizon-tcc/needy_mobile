@@ -59,16 +59,6 @@ const Profile = ({navigation}) =>  {
 		}).catch(error => {
 			console.log("ERRO AXIOS: " + error)
 		});
-
-		// axios.get(`http://needy-api.herokuapp.com/doadores/${id}`, {
-		// 	headers: {
-		// 		'Authorization': `Bearer ${token}`
-		// 	}
-		// }).then(response => {
-		// 	setDataUser(response.data);
-		// }).catch(error => {
-		// 	console.log("ERRO AXIOS: " + error)
-		// });
 	 }, [])
 
 	return (
