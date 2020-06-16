@@ -281,7 +281,7 @@ export default App = () => {
 								name="Termo"
 								component={Termo}
 								options={{
-									title: "Termo",
+									title: "Termos de Privacidade de Uso",
 									animationEnabled: true,
 
 									headerShown: true,
