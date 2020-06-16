@@ -6,22 +6,22 @@ import styles from "./styles";
 import { View } from "react-native";
 import Markers from "../../components/Markers";
 
-export default class Maps extends React.Component {
-	render() {
-		return (
-			<View style={styles.container}>
-				<MapView
-					style={styles.mapStyle}
-					initialRegion={{
-						latitude: -23.5530698,
-						longitude: -46.4002202,
-						latitudeDelta: 0.0043,
-						longitudeDelta: 0.0034,
-					}}
-				>
-					<Markers />
-				</MapView>
-			</View>
-		);
-	}
+const Maps = () => {
+	return (
+		<View style={styles.container}>
+			<MapView
+				style={styles.mapStyle}
+				initialRegion={{
+					latitude: -23.5530698,
+					longitude: -46.4002202,
+					latitudeDelta: 0.0043,
+					longitudeDelta: 0.0034,
+				}}
+			>
+				{/* <Markers /> */}
+			</MapView>
+		</View>
+	);
 }
+
+export default Maps;
