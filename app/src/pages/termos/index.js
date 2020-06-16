@@ -26,8 +26,6 @@ const Termos = () => {
                          <Paragrafo texto="Utilizamos cookies por vários motivos, detalhados abaixo. Infelizmente, na maioria dos casos, não existem opções padrão do setor para desativar os cookies sem desativar completamente a funcionalidade e os recursos que eles adicionam a este site. É recomendável que você deixe todos os cookies se não tiver certeza se precisa ou não deles, caso sejam usados ​​para fornecer um serviço que você usa."/>
                          <Subtitle texto="Desativar cookies"/>
                          <Paragrafo texto="Você pode impedir a configuração de cookies ajustando as configurações do seu navegador (consulte a Ajuda do navegador para saber como fazer isso). Esteja ciente de que a desativação de cookies afetará a funcionalidade deste e de muitos outros sites que você visita. A desativação de cookies geralmente resultará na desativação de determinadas funcionalidades e recursos deste site. Portanto, é recomendável que você não desative os cookies."/>
-                         <Paragrafo texto=""/>
-                         <Paragrafo texto=""/>
                     </View>
                </View>
           </>
