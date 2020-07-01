@@ -1,8 +1,8 @@
 import React from "react";
 import { AsyncStorage } from "react-native";
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 import Login from "./src/pages/login/";
@@ -18,8 +18,10 @@ import editNotifications from "./src/pages/editNotifications";
 import Achievements from "./src/pages/achiv";
 import Carteirinha from "./src/pages/carteirinha";
 import Ajuda from "./src/pages/ajuda";
-import Loading from './src/pages/loading/index';
-import Termo from './src/pages/termos/';
+import Loading from "./src/pages/loading/index";
+import Termo from "./src/pages/termos/";
+import base64 from "base-64";
+import axios from "axios";
 
 const Stack = createStackNavigator();
 const NavBar = createBottomTabNavigator();
@@ -28,289 +30,265 @@ console.disableYellowBox = true;
 
 const AuthContext = React.createContext();
 
-
-
 const BottomNav = () => {
-	return (
-		<NavBar.Navigator
-			tabBarOptions={
-				{
-					activeTintColor: '#ca2929',
-					showLabel: false,
-					inactiveTintColor: '#8c8c8'
+  return (
+    <NavBar.Navigator
+      tabBarOptions={{
+        activeTintColor: "#ca2929",
+        showLabel: false,
+        inactiveTintColor: "#8c8c8",
+      }}
+    >
+      <NavBar.Screen
+        name="Home"
+        component={Home}
+        t
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5
+              name="home"
+              color={focused ? "#ca2929" : "#8c8c8c"}
+              size={25}
+            />
+          ),
+        }}
+      />
 
-				}
-			}
-		>
-			<NavBar.Screen
-				name="Home"
-				component={Home}
-				t
-				options={
-					{
-						tabBarIcon: ({ focused }) => <FontAwesome5 name='home' color={focused ? '#ca2929' : '#8c8c8c'} size={25} />,
+      <NavBar.Screen
+        name="Maps"
+        component={Maps}
+        options={{
+          tabBarIcon: () => <MapButton />,
+        }}
+      />
 
-					}
-				}
-			/>
-
-
-			<NavBar.Screen
-				name="Maps"
-				component={Maps}
-				options={{
-					tabBarIcon: () => <MapButton />,
-				}}
-			/>
-
-
-			<NavBar.Screen
-				name="Perfil"
-				component={Perfil}
-				options={{
-					tabBarIcon: ({ focused }) => <FontAwesome5 name="user" color={focused ? '#ca2929' : '#8c8c8c'} size={24} />
-				}}
-
-			/>
-		</NavBar.Navigator>
-
-
-	)
-
-}
+      <NavBar.Screen
+        name="Perfil"
+        component={Perfil}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5
+              name="user"
+              color={focused ? "#ca2929" : "#8c8c8c"}
+              size={24}
+            />
+          ),
+        }}
+      />
+    </NavBar.Navigator>
+  );
+};
 
 export default App = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [token, setToken] = React.useState(null);
+  const [id, setId] = React.useState();
+  const [userLogged, setUserLogged] = React.useState(false);
 
-	const [isLoading, setIsLoading] = React.useState(true);
-	const [token, setToken] = React.useState(null);
-	const [userLogged, setUserLogged] = React.useState(false);
+  const checkIfLogged = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        // We have data!!
+        console.log("token encontrado");
 
-	const checkIfLogged = async () => {
-		try {
-			const value = await AsyncStorage.getItem("token");
-			if (value !== null) {
-				// We have data!!
-				console.log(`
-					
-					TOKEN:
-					${value}
+        setToken(value);
+        setUserLogged(true);
 
-				`);
-				
-				setToken(value);
-				setUserLogged(true);
+        const parts = value.split(".");
+        const payload = parts[1];
+        const payload_decoded = base64.decode(payload);
+        const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
 
+        setId(String(newJSON.idUsuario));
+      } else {
+        setUserLogged(false);
+      }
+    } catch (error) {
+      // Error retrieving data
+      console.log(error);
+    }
+  };
 
-			} else {
-				setUserLogged(false);
-				
-			}
-		} catch (error) {
-			// Error retrieving data
-			console.log(error);
-		}
+  checkIfLogged();
 
-	}
+  console.log("ID DO USUARIO:" + id);
 
-	checkIfLogged();
+  console.log(`VALOR DO TOKEN : ${token}`);
+  console.log("acesso:" + token);
 
-	const authContext = React.useMemo(() => {
-		return {
-			logar: () => {
-				setIsLoading(false);
-				setUserLogged(true);
-			},
+  const api = axios.create({
+    baseURL: "http://needy-api.herokuapp.com/",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-			deslogar: () => {
-				setIsLoading(false);
-				setUserLogged(false);
+  const authContext = React.useMemo(() => {
+    return {
+      logar: () => {
+        setIsLoading(false);
+        setUserLogged(true);
+      },
 
-			}
-		}
-	}, [])
+      deslogar: () => {
+        setIsLoading(false);
+        setUserLogged(false);
+      },
+    };
+  }, []);
 
+  React.useEffect(() => {
+    setInterval(() => {
+      setIsLoading(!isLoading);
+    }, 4000);
+  }, []);
 
-	React.useEffect(() => {
-		setInterval(() => {
-			setIsLoading(!isLoading);
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            animationEnabled: false,
+          }}
+        >
+          {isLoading ? (
+            <Stack.Screen name="Loading" component={Loading} />
+          ) : userLogged ? (
+            <>
+              <Stack.Screen name="Home" component={BottomNav} />
 
-		}, 4000);
-	}, []);
+              <Stack.Screen
+                name="Config"
+                component={Config}
+                options={{
+                  title: "Configurações",
+                  animationEnabled: true,
 
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
-	return (
+              <Stack.Screen
+                name="Achiv"
+                component={Achievements}
+                options={{
+                  title: "Conquistas",
+                  animationEnabled: true,
 
-		<AuthContext.Provider value={authContext}>
-			<NavigationContainer>
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
-				<Stack.Navigator
-					screenOptions={{
-						headerShown: false,
-						animationEnabled: false,
-					}}
-				>
+              <Stack.Screen
+                name="editNotifications"
+                component={editNotifications}
+                options={{
+                  title: "Editar Notificações",
+                  animationEnabled: true,
 
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
+              <Stack.Screen
+                name="Carteirinha"
+                component={Carteirinha}
+                options={{
+                  title: "Carteirinha",
+                  animationEnabled: true,
 
-					{isLoading ? <Stack.Screen name="Loading" component={Loading} /> : userLogged ? (
-						<>
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
+              <Stack.Screen
+                name="Notifications"
+                component={Notifications}
+                options={{
+                  title: "Notificações",
+                  animationEnabled: true,
 
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
-							<Stack.Screen
-								name="Home"
-								component={BottomNav}
-							/>
+              <Stack.Screen
+                name="editProfile"
+                component={editProfile}
+                options={{
+                  title: "Editar Perfil",
+                  animationEnabled: true,
 
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
+              <Stack.Screen
+                name="Ajuda"
+                component={Ajuda}
+                options={{
+                  title: "Ajuda",
+                  animationEnabled: true,
 
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
 
-							<Stack.Screen
-								name="Config"
-								component={Config}
-								options={{
-									title: "Configurações",
-									animationEnabled: true,
+              <Stack.Screen
+                name="Termo"
+                component={Termo}
+                options={{
+                  title: "Termos de Privacidade de Uso",
+                  animationEnabled: true,
 
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
+                  headerShown: true,
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#ca2929",
+                  },
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={Login} />
 
-
-							<Stack.Screen
-								name="Achiv"
-								component={Achievements}
-								options={{
-									title: "Conquistas",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-
-
-							<Stack.Screen
-								name="editNotifications"
-								component={editNotifications}
-								options={{
-									title: "Editar Notificações",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-
-
-							<Stack.Screen
-								name="Carteirinha"
-								component={Carteirinha}
-								options={{
-									title: "Carteirinha",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-
-							<Stack.Screen
-								name="Notifications"
-								component={Notifications}
-								options={{
-									title: "Notificações",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-							<Stack.Screen
-								name="editProfile"
-								component={editProfile}
-								options={{
-									title: "Editar Perfil",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-
-							<Stack.Screen
-								name="Ajuda"
-								component={Ajuda}
-								options={{
-									title: "Ajuda",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>
-
-							<Stack.Screen
-								name="Termo"
-								component={Termo}
-								options={{
-									title: "Termos de Privacidade de Uso",
-									animationEnabled: true,
-
-									headerShown: true,
-									headerTintColor: "#fff",
-									headerStyle: {
-										backgroundColor: "#ca2929",
-									},
-								}}
-							/>	
-
-						</>
-					) : (
-							<>
-								<Stack.Screen
-									name="Login"
-									component={Login}
-								/>
-
-
-								<Stack.Screen
-									name="Intro"
-									component={Intro}
-								/>
-							</>
-						)}
-				</Stack.Navigator>
-			</NavigationContainer>
-		</AuthContext.Provider>
-	)
-}
+              <Stack.Screen name="Intro" component={Intro} />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+};
 export { AuthContext };
-
