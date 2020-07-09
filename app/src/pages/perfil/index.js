@@ -11,56 +11,10 @@ import { Tooltip } from "react-native-elements";
 import { FontAwesome5 } from "@expo/vector-icons";
 import base64 from "base-64";
 import axios from "axios";
+import AuthContext from "../../contexts/auth";
 
 const Profile = ({ navigation }) => {
-  const [dataUser, setDataUser] = useState({});
-  const [token, setToken] = useState(null);
-  const [id, setId] = useState(null);
-
-  //   const isTokenValid = async () => {
-  //     try {
-  //       const value = await AsyncStorage.getItem("token");
-  //       if (value !== null) {
-  //         // We have data!!
-  //         setToken(value);
-  //         console.log("token:" + token);
-  //         const parts = value.split(".");
-  //         const payload = parts[1];
-  //         const payload_decoded = base64.decode(payload);
-  //         const newJSON = JSON.parse(payload_decoded.match(/\S+/)[0]);
-
-  //         setId(String(newJSON.idUsuario));
-  //         console.log(id);
-  //       } else {
-  //         console.log("usuarion não está logado");
-  //       }
-  //     } catch (error) {
-  //       // Error retrieving data
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   isTokenValid();
-
-  //   const api = axios.create({
-  //     baseURL: "http://needy-api.herokuapp.com/",
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-
-  //   const fetchData = async () => {
-  //     try {
-  //       const result = await api.get(`doadores/${id}`);
-  //       setDataUser(result.data);
-  //       console.log(dataUser);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchData();
-
+  const { user } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -80,7 +34,7 @@ const Profile = ({ navigation }) => {
           </View>
 
           <View style={styles.contentDiv}>
-            <Text style={styles.welcomeText}>Olá, Manocchio</Text>
+            <Text style={styles.welcomeText}>Olá,{user.nomeDoador}</Text>
 
             <View style={styles.line} />
           </View>
