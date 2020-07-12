@@ -112,7 +112,10 @@ export const AuthProvider = ({ children }) => {
         setRemember,
         checked,
         emailContext,
+        setEmailContext,
         passwordContext,
+        setPasswordContext,
+        setEmailContext,
       }}
     >
       {children}

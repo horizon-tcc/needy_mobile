@@ -23,10 +23,9 @@ const { width, height } = Dimensions.get("window");
 const Login = ({ navigation }) => {
   const [eyeIcon, setEyeIcon] = React.useState("eye-slash");
   const [inputType, setInputType] = React.useState(true);
-  const [email, setEmail] = React.useState("");
-  const [senha, setSenha] = React.useState("");
-  const { validar, error, checked, setRemember, emailContext, passwordContext } = React.useContext(AuthContext);
-
+  const { validar, error, checked, setRemember, emailContext, passwordContext, setPasswordContext, setEmailContext } = React.useContext(AuthContext);
+  const [email, setEmail] = React.useState(emailContext);
+  const [senha, setSenha] = React.useState(passwordContext);
 
   const handleLogIn = () => {
     validar(email, senha);
@@ -46,8 +45,7 @@ const Login = ({ navigation }) => {
   React.useEffect(() => {
     setEmail(emailContext);
     setSenha(passwordContext);
-  })
-
+  });
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
@@ -79,9 +77,9 @@ const Login = ({ navigation }) => {
               placeholderTextColor={error ? 'red' : "rgba(0,0,0,0.4)"}
               textContentType="emailAddress"
               onChangeText={(text) => {
-                setEmail(text);
+                setEmailContext(text);
               }}
-              value={email}
+              value={emailContext}
             ></TextInput>
 
             <Icon name="lock" color="red" size={32} style={styles.inputIcon} />
@@ -92,10 +90,10 @@ const Login = ({ navigation }) => {
               style={error ? styles.textInputError : styles.textInput}
               placeholderTextColor={error ? 'red' : "rgba(0,0,0,0.4)"}
               textContentType="password"
-              value={senha}
               onChangeText={(text) => {
-                setSenha(text);
+                setPasswordContext(text);
               }}
+              value={passwordContext}
             ></TextInput>
 
             <TouchableWithoutFeedback onPress={toggleEye}>
@@ -103,12 +101,8 @@ const Login = ({ navigation }) => {
                 <Icon name={eyeIcon} color="rgba(0,0,0,0.6)" size={26} />
               </Animated.View>
             </TouchableWithoutFeedback>
-            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: width - (width - 55) }}>
-              <Text style={{
-                marginTop: 8,
-                color: 'rgba(0,0,0,0.7)',
-                fontWeight: 'bold'
-              }}>Lembre-se de mim</Text>
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: width - (width - 40) }}>
+
               <Checkbox
                 color={'#ca2929'}
                 status={checked ? 'checked' : 'unchecked'}
@@ -116,6 +110,12 @@ const Login = ({ navigation }) => {
                   setRemember()
                 }}
               />
+              <Text style={{
+                marginTop: 8,
+                color: 'rgba(0,0,0,0.7)',
+                fontWeight: 'bold'
+              }}>Lembre-se de mim</Text>
+
             </View>
             {error ? (<>
               <Text style={{
