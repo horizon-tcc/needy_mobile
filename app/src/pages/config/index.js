@@ -20,10 +20,10 @@ const Config = ({ navigation }) => {
       <ConfigurationDefault
         title={"Editar Perfil"}
         subtitle={true}
-        info={"Endereço, E-mail, Privacidade"}
+        info={"Endereço, E-mail, Foto de perfil..."}
         icon={<FontAwesome5 name="user-cog" color={"#ca2929"} size={23} />}
         hasRoute={true}
-        navigateTo={"editPerfil"}
+        navigateTo={"editProfile"}
       />
 
       <ConfigurationDefault
