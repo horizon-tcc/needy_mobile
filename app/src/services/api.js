@@ -4,7 +4,7 @@ import axios from "axios";
 export const logIn = (email, senha) => {
   var result;
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios({
       url: "http://needy-api.herokuapp.com/login",
       method: "POST",
@@ -14,12 +14,12 @@ export const logIn = (email, senha) => {
       },
     })
       .then((response) => {
-        console.log(response.data.token);
         result = response.data.token;
         resolve(result);
       })
-      .then((error) => {
+      .catch((error) => {
         resolve(null);
+        reject(error);
       });
   });
 };
@@ -38,9 +38,8 @@ export const getUser = (token) => {
         user = response.data;
         resolve(user);
       })
-      .then((error) => {
+      .catch((error) => {
         console.log(error);
-        resolve(null);
       });
   });
 };

@@ -17,6 +17,7 @@ import {
 } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/FontAwesome";
 import AuthContext from "../../contexts/auth";
+import { Checkbox } from 'react-native-paper';
 const { width, height } = Dimensions.get("window");
 
 const Login = ({ navigation }) => {
@@ -24,11 +25,14 @@ const Login = ({ navigation }) => {
   const [inputType, setInputType] = React.useState(true);
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
-  const { validar } = React.useContext(AuthContext);
+  const { validar, error, checked, setRemember, emailContext, passwordContext } = React.useContext(AuthContext);
+
 
   const handleLogIn = () => {
     validar(email, senha);
   };
+
+
   const toggleEye = () => {
     if (inputType == false) {
       setEyeIcon("eye-slash");
@@ -38,6 +42,13 @@ const Login = ({ navigation }) => {
       setInputType(!inputType);
     }
   };
+
+  React.useEffect(() => {
+    setEmail(emailContext);
+    setSenha(passwordContext);
+  })
+
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <ImageBackground
@@ -64,8 +75,8 @@ const Login = ({ navigation }) => {
             />
             <TextInput
               placeholder="E-mail"
-              style={styles.textInput}
-              placeholderTextColor="rgba(0,0,0,0.4)"
+              style={error ? styles.textInputError : styles.textInput}
+              placeholderTextColor={error ? 'red' : "rgba(0,0,0,0.4)"}
               textContentType="emailAddress"
               onChangeText={(text) => {
                 setEmail(text);
@@ -78,8 +89,8 @@ const Login = ({ navigation }) => {
               password={true}
               secureTextEntry={inputType}
               placeholder="Senha"
-              style={styles.textInput}
-              placeholderTextColor="rgba(0,0,0,0.4)"
+              style={error ? styles.textInputError : styles.textInput}
+              placeholderTextColor={error ? 'red' : "rgba(0,0,0,0.4)"}
               textContentType="password"
               value={senha}
               onChangeText={(text) => {
@@ -92,6 +103,29 @@ const Login = ({ navigation }) => {
                 <Icon name={eyeIcon} color="rgba(0,0,0,0.6)" size={26} />
               </Animated.View>
             </TouchableWithoutFeedback>
+            <View style={{ display: 'flex', flexDirection: 'row', marginLeft: width - (width - 55) }}>
+              <Text style={{
+                marginTop: 8,
+                color: 'rgba(0,0,0,0.7)',
+                fontWeight: 'bold'
+              }}>Lembre-se de mim</Text>
+              <Checkbox
+                color={'#ca2929'}
+                status={checked ? 'checked' : 'unchecked'}
+                onPress={() => {
+                  setRemember()
+                }}
+              />
+            </View>
+            {error ? (<>
+              <Text style={{
+                color: 'red',
+                textAlign: 'center',
+              }}>Usuário ou senha incorretos, digite novamente.</Text>
+            </>) : (<>
+
+              <Text></Text>
+            </>)}
 
             <TouchableOpacity
               style={styles.buttonEntrar}
@@ -131,7 +165,7 @@ const Login = ({ navigation }) => {
           </View>
         </View>
       </ImageBackground>
-    </KeyboardAvoidingView>
+    </KeyboardAvoidingView >
   );
 };
 
@@ -214,6 +248,25 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     marginVertical: 0,
     borderColor: "rgba(0,0,0,0.4)",
+  },
+
+
+  textInputError: {
+    height: 60,
+    width: width - 55,
+    alignSelf: "center",
+    color: "red",
+    borderRadius: 25,
+    borderWidth: 1.5,
+    borderTopWidth: 0,
+    borderRightWidth: 0,
+    borderLeftWidth: 0,
+    marginHorizontal: 0,
+    paddingLeft: 53,
+    paddingRight: 53,
+    paddingTop: 15,
+    marginVertical: 0,
+    borderColor: "red",
   },
 
   closeButton: {
