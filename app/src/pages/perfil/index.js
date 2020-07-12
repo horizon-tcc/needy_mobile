@@ -15,6 +15,12 @@ import AuthContext from "../../contexts/auth";
 
 const Profile = ({ navigation }) => {
   const { user } = React.useContext(AuthContext);
+  const formattedName = user.nomeDoador.split(" ").shift();
+
+  useEffect(() => {
+    console.log(user);
+  }, []);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -22,9 +28,10 @@ const Profile = ({ navigation }) => {
           <Image
             style={styles.profilePic}
             source={{
-              uri:
-                "https://scontent.fgru6-1.fna.fbcdn.net/v/t1.0-9/83743190_2660059810782257_5370719641435897856_n.jpg?_nc_cat=102&_nc_sid=85a577&_nc_eui2=AeHQEWPOJ1bkpoy1UdRwoZxkyu-U210QaFbK75TbXRBoVkshoJ0ZiH9Ab0piHkXCgfnCr1IJ02TosPJ-1NqdmwRR&_nc_oc=AQkAhx1MFSgpMj4_Lfy3YRR352IWwvBSHOvdjNyBTSkZAQjGq9P7nrLkMnHucfwf-TxqfFf_dTnBSQ4vy1i72s6L&_nc_ht=scontent.fgru6-1.fna&oh=5ffb66aa8e0a543f88ff5cd3e6fb9eed&oe=5EB24F03",
+              uri: `http://needy-api.herokuapp.com/imagens/${user.fotoUsuario}`
+
             }}
+            resizeMethod={'auto'}
           />
 
           <View style={styles.editBtn}>
@@ -34,7 +41,7 @@ const Profile = ({ navigation }) => {
           </View>
 
           <View style={styles.contentDiv}>
-            <Text style={styles.welcomeText}>Olá,{user.nomeDoador}</Text>
+            <Text style={styles.welcomeText}>Olá, {formattedName}!</Text>
 
             <View style={styles.line} />
           </View>

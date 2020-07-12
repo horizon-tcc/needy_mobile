@@ -1,59 +1,260 @@
 import React from "react";
 import styles from "./styles";
-import { View, Image, Text } from "react-native";
+import { ScrollView, View, Text, Dimensions, Image } from "react-native";
+import CardFlip from "react-native-card-flip";
+import { Tooltip } from "react-native-elements";
+import { FontAwesome5 } from "@expo/vector-icons";
+import AuthContext from "../../contexts/auth";
+
+import { TouchableOpacity } from "react-native-gesture-handler";
+const { width, height } = Dimensions.get("screen");
 
 const carteirinha = () => {
+  const { user } = React.useContext(AuthContext);
+
+  var card = React.createRef();
   return (
     <>
-      <View style={styles.container}>
-        <View style={styles.carteirinha}>
-          <View style={styles.whiteBorder}>
-            <Text style={styles.title}>Hemocentro</Text>
-          </View>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
+        <View style={styles.container}>
+          <CardFlip style={styles.carteirinha} ref={(cardFace) => card = cardFace}>
+            <TouchableOpacity
+              style={styles.cardContainer}
+              activeOpacity={1}
+              onPress={() => card.flip()}
+              onLongPress={() => card.tip({ direction: 'right' })}
+            >
+              <View style={styles.whiteBorder} />
+              <View
+                style={{
+                  flex: 1,
+                  position: 'relative',
+                  marginTop: '40%',
+                  width: '100%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderTopRightRadius: 60,
+                  borderTopLeftRadius: 60,
+                  backgroundColor: '#fff',
+                  borderBottomLeftRadius: 40,
+                  borderBottomRightRadius: 40,
+                }}>
+                <View
+                  style={{
+                    backgroundColor: '#fff',
+                    position: 'absolute',
+                    alignSelf: 'center',
+                    top: -100,
+                    height: 140,
+                    borderRadius: 80,
+                    width: 140,
+                    zIndex: 1,
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 5,
+                  }}>
+                  <Image
+                    style={{
+                      flex: 1,
+                      width: '100%',
+                      borderRadius: 80,
+                    }}
+                    source={{ uri: `http://needy-api.herokuapp.com/imagens/${user.fotoUsuario}` }} />
+                </View>
+                <View
+                  style={{
+                    backgroundColor: 'transparent',
+                    width: '90%',
+                    height: '100%',
+                    paddingTop: 45,
+                    marginTop: 35,
+                  }}>
+                  <View style={{
+                    marginBottom: 20,
+                  }}>
+                    <Text style={{
+                      color: '#ca2929',
+                      fontSize: 20,
+                      fontWeight: 'bold'
+                    }}>
+                      Nome
+                  </Text>
+                    <Text style={{
+                      marginTop: 10,
+                      color: 'rgba(0,0,0,0.6)',
+                      fontWeight: "bold",
+                    }}>
+                      {user.nomeDoador}
+                    </Text>
+                  </View>
 
-          <View style={styles.cardContainer}>
-            <View style={styles.row}>
-              <Image
-                style={styles.profilePic}
-                source={{
-                  uri:
-                    "https://scontent.fgru6-1.fna.fbcdn.net/v/t1.0-9/83743190_2660059810782257_5370719641435897856_n.jpg?_nc_cat=102&_nc_sid=85a577&_nc_eui2=AeHQEWPOJ1bkpoy1UdRwoZxkyu-U210QaFbK75TbXRBoVkshoJ0ZiH9Ab0piHkXCgfnCr1IJ02TosPJ-1NqdmwRR&_nc_oc=AQkAhx1MFSgpMj4_Lfy3YRR352IWwvBSHOvdjNyBTSkZAQjGq9P7nrLkMnHucfwf-TxqfFf_dTnBSQ4vy1i72s6L&_nc_ht=scontent.fgru6-1.fna&oh=5ffb66aa8e0a543f88ff5cd3e6fb9eed&oe=5EB24F03",
+
+                  <View style={{
+                    marginBottom: 20,
+                  }}>
+
+                    <View style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                    }}>
+                      <View>
+                        <Text style={{
+                          color: '#ca2929',
+                          fontSize: 20,
+                          fontWeight: 'bold'
+                        }}>
+                          Sexo
+                  </Text>
+                        <Text style={{
+                          marginTop: 10,
+                          color: 'rgba(0,0,0,0.6)',
+                          fontWeight: "bold",
+                        }}>
+                          {user.descricaoSexo}
+                        </Text>
+                      </View>
+                      <View style={{
+                        position: 'relative',
+                        marginLeft: 50,
+                      }}>
+                        <Text style={{
+                          color: '#ca2929',
+                          fontSize: 20,
+                          fontWeight: 'bold'
+                        }}>
+                          Data de Nascimento
+                  </Text>
+                        <Text style={{
+                          marginTop: 10,
+                          color: 'rgba(0,0,0,0.6)',
+                          fontWeight: "bold",
+                        }}>
+                          {user.dataNascimentoDoador}
+                        </Text>
+                      </View>
+                    </View>
+
+
+                  </View>
+
+                  <View style={{
+                    marginBottom: 20,
+                  }}>
+
+                    <View style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                    }}>
+                      <View>
+                        <Text style={{
+                          color: '#ca2929',
+                          fontSize: 20,
+                          fontWeight: 'bold'
+                        }}>
+                          Tipo Sanguíneo
+                  </Text>
+                        <Text style={{
+                          marginTop: 10,
+                          color: 'rgba(0,0,0,0.6)',
+                          fontWeight: "bold",
+                        }}>
+                          {user.descricaoTipoSanguineo}
+                        </Text>
+                      </View>
+                      <View style={{
+                        position: 'relative',
+                        marginLeft: 50,
+                      }}>
+                        <Text style={{
+                          color: '#ca2929',
+                          fontSize: 20,
+                          fontWeight: 'bold'
+                        }}>
+                          Fator RH
+                  </Text>
+                        <Text style={{
+                          marginTop: 10,
+                          color: 'rgba(0,0,0,0.6)',
+                          fontWeight: "bold",
+                        }}>
+                          {user.idFatorRh == 1 ? '+' : '-'} ({user.descricaoFatorRh})
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+
+                  <View style={{
+                    position: 'relative',
+                    backgroundColor: '#ca2929',
+                    borderRadius: 40,
+                    marginTop: 10,
+                    width: 150,
+                    height: 150,
+                    justifyContent: 'center',
+                    alignSelf: 'center',
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 5,
+                  }}>
+                    <Text style={{
+                      color: '#fff',
+                      fontSize: 50,
+                      fontWeight: 'bold',
+                      textAlign: 'center',
+
+                    }}>{user.descricaoTipoSanguineo}{user.idFatorRh == 1 ? '+' : '-'}</Text>
+                  </View>
+
+
+                </View>
+
+
+              </View>
+
+
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onLongPress={() => card.tip()}
+              onPress={() => card.flip()}
+              style={styles.cardContainer}></TouchableOpacity>
+          </CardFlip>
+
+
+          <Tooltip
+            popover={
+              <Text
+                style={{
+                  color: "#fff",
+                  fontWeight: "bold",
                 }}
-              />
-              <View style={styles.column}>
-                <Text style={styles.title}>Nome</Text>
-                <Text>Gustavo Manocchio</Text>
-              </View>
-            </View>
-            <View style={styles.infoContainer}>
-              <View style={styles.row}>
-                <View style={styles.column}>
-                  <Text style={styles.title}>Tipo</Text>
-                  <Text style={{ textAlign: "center" }}>A</Text>
-                </View>
-                <View style={{ marginLeft: 80 }} />
-                <View style={styles.column}>
-                  <Text style={styles.title}>Ultima Doação</Text>
-                  <Text style={{ textAlign: "center" }}>14/03/2020</Text>
-                </View>
-              </View>
-
-              <View style={styles.row}>
-                <View style={styles.column}>
-                  <Text style={styles.title}>Fator RH</Text>
-                  <Text>Positivo (+)</Text>
-                </View>
-                <View style={{ marginLeft: 80 }} />
-
-                <View style={styles.column}>
-                  <Text style={styles.title}>Código</Text>
-                  <Text style={{ textAlign: "center" }}>256793</Text>
-                </View>
-              </View>
-            </View>
-          </View>
+              >
+                Aperte na carteirinha para saber mais!
+                </Text>
+            }
+            containerStyle={{
+              backgroundColor: "#ec6262",
+            }}
+            pointerColor={"#fff"}
+            height={80}
+            width={200}
+          >
+            <FontAwesome5 name="info-circle" color={"#ec6262"} size={30} />
+          </Tooltip>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 };
