@@ -14,6 +14,7 @@ import editNotifications from "../pages/editNotifications";
 import Achievements from "../pages/achiv";
 import Carteirinha from "../pages/carteirinha";
 import Ajuda from "../pages/ajuda";
+import newPassword from '../pages/newPassword';
 import Termo from "../pages/termos/";
 
 const Stack = createStackNavigator();
@@ -30,8 +31,7 @@ const BottomNav = () => {
     >
       <NavBar.Screen
         name="Home"
-        component={Home}
-        t
+        component={newPassword}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
