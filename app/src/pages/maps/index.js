@@ -8,6 +8,11 @@ import Markers from "../../components/Markers";
 import * as Location from "expo-location";
 
 const Maps = () => {
+
+  useEffect(() => {
+    
+  },[]);
+
   //   const [location, setLocation] = useState({
   //     coords: {
   //       accuracy: 730,
@@ -74,7 +79,7 @@ const Maps = () => {
             longitude: -46.6348969,
           }}
           title={"Hemocentro São Lucas - Unidade Liberdade"}
-          image={require("../../assets/images/marker.png")}
+          image={require("../../assets/images/marker2.png")}
         />
 
         <Marker
@@ -83,7 +88,7 @@ const Maps = () => {
             longitude: -46.6689441,
           }}
           title={"Fundação Pró-Sangue Hemocentro de São Paulo"}
-          image={require("../../assets/images/marker.png")}
+          image={require("../../assets/images/marker2.png")}
         />
 
         <Marker

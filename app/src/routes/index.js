@@ -7,7 +7,7 @@ import AuthContext from "../contexts/auth";
 const Routes = () => {
   const { signed } = React.useContext(AuthContext);
 
-  return signed ? <NewPasswordRoute /> : <AuthRoutes />;
+  return signed ? <InsideRoutes /> : <AuthRoutes />;
 };
 
 export default Routes;

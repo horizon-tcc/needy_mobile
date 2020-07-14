@@ -9,10 +9,11 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 
 const editProfile = () => {
-    const {user} = React.useContext(AuthContext);
+    const {user, responsavel} = React.useContext(AuthContext);
     const [statusDoador, setStatusDoador] = React.useState("");
     const [complemento, setComplemento] = React.useState("");
     const [foto, setFoto] = React.useState(user.fotoUsuario);
+    const [responsavelScreen, setResponsavelScreen] = React.useState("");
 
     React.useEffect(() => {
         if (user.statusDoador == 0) {
@@ -30,7 +31,7 @@ const editProfile = () => {
         }
 
         if (user.fotoUsuario == null) {
-            setFoto("41fe627c50fbcfd50986b70158b6b493.jpg");
+            setFoto("../../assets/images/user.png");
         }
 
         getPermissionAsync = async () => {
@@ -41,6 +42,12 @@ const editProfile = () => {
                 }
             }
         };
+
+        if (responsavel === null) {
+            setResponsavelScreen("Sem Responsável");
+        } else {
+            setResponsavelScreen(responsavel.nomeResponsavel)
+        }
 
     }, [])
 
@@ -80,18 +87,19 @@ const editProfile = () => {
                 <TouchableOpacity
                     onPress={() => _pickImage()}
                 >
-                    {/* <Image 
-                        source={{
-                            uri: `https://needy-api.herokuapp.com/imagens/${foto}`
-                        }}
-                        style={{
-                            borderRadius: 500,
-                            width: 256,
-                            height: 256,
-                        }}
-                        resizeMode="cover"
-                    /> */}
-                    {foto && <Image source={{ uri: `https://needy-api.herokuapp.com/imagens/${foto}` }} style={{ width: 256, height: 256, borderRadius: 500, }} />}
+                    {
+                        foto === null 
+                        ? 
+                        <Image 
+                            source={{ uri: `https://needy-api.herokuapp.com/imagens/${foto}` }} 
+                            style={{ width: 256, height: 256, borderRadius: 500, }} 
+                        /> 
+                        : 
+                        <Image 
+                            source={require('../../assets/images/user.png')} 
+                            style={{ width: 256, height: 256, borderRadius: 500, }} 
+                        />
+                    }
                 </TouchableOpacity>
             </View>
 
@@ -101,7 +109,7 @@ const editProfile = () => {
             />
             <CardInfo 
                 titulo="Responsável"
-                dado="Você mesmo seu otário"
+                dado={responsavelScreen}
             />
             <CardInfo 
                 titulo="Sexo"

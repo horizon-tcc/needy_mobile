@@ -43,3 +43,24 @@ export const getUser = (token) => {
       });
   });
 };
+
+export const getResponsavel = (token) => {
+  var responsavel;
+  return new Promise((resolve) => {
+    axios({
+      url: "http://needy-api.herokuapp.com/responsavel",
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        responsavel = response.data;
+        resolve(responsavel);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+};
+

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect } from "react";
-import { logIn, getUser } from "../services/api";
+import { logIn, getUser, getResponsavel } from "../services/api";
 import { AsyncStorage } from "react-native";
 const AuthContext = createContext({});
 import { ToastAndroid } from 'react-native';
@@ -7,6 +7,7 @@ import { value } from "popmotion";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
+  const [responsavel, setResponsavel] = React.useState(null);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState(false);
   const [emailContext, setEmailContext] = React.useState('');
@@ -55,28 +56,44 @@ export const AuthProvider = ({ children }) => {
 
   const validar = async (email, senha) => {
     try {
+
       const response = await logIn(email, senha);
+
       if (response != null) {
+
         await AsyncStorage.setItem("@needy:token", response);
+
         const doador = await getUser(response);
-        console.log(doador);
+        const resposavel = await getResponsavel(response);
+
+        console.log("DOADOR [auth.js]\n" + doador);
+        console.log("RESPONSAVEL [auth.js]\n" + resposavel);
+
         await AsyncStorage.setItem("@needy:doador", JSON.stringify(doador));
+        await AsyncStorage.setItem("@needy:responsavel", JSON.stringify(responsavel));
 
         if (checked) {
+
           setEmailContext(email);
           setPasswordContext(senha);
+
           await AsyncStorage.setItem('@needy:email', email);
           await AsyncStorage.setItem('@needy:senha', senha);
+
         } else {
+
           setEmailContext('');
           setPasswordContext('');
+
           await AsyncStorage.removeItem('@needy:email');
           await AsyncStorage.removeItem('@needy:senha');
+
         }
+
         await AsyncStorage.setItem('@needy:remember', JSON.stringify(checked))
 
         setUser(doador);
-
+        setResponsavel(resposavel);
 
       } else {
         console.log("ocorreu um erro");
@@ -116,6 +133,7 @@ export const AuthProvider = ({ children }) => {
         passwordContext,
         setPasswordContext,
         setEmailContext,
+        responsavel,
       }}
     >
       {children}
