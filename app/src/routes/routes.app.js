@@ -11,10 +11,9 @@ import MapButton from "../components/MapButton";
 import Notifications from "../pages/notifications";
 import editProfile from "../pages/editProfile";
 import editNotifications from "../pages/editNotifications";
-import Achievements from "../pages/achiv";
+import Doacoes from '../pages/doacoes/index';
 import Carteirinha from "../pages/carteirinha";
 import Ajuda from "../pages/ajuda";
-import newPassword from '../pages/newPassword';
 import Termo from "../pages/termos/";
 
 const Stack = createStackNavigator();
@@ -31,7 +30,7 @@ const BottomNav = () => {
     >
       <NavBar.Screen
         name="Home"
-        component={newPassword}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <FontAwesome5
@@ -94,10 +93,10 @@ const InsideRoutes = () => {
       />
 
       <Stack.Screen
-        name="Achiv"
-        component={Achievements}
+        name="Doacoes"
+        component={Doacoes}
         options={{
-          title: "Conquistas",
+          title: "Doacoes",
           animationEnabled: true,
 
           headerShown: true,

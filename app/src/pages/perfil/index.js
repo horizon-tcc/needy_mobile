@@ -117,15 +117,15 @@ const Profile = ({ navigation }) => {
 
           <View style={styles.cardContainer}>
             <TapGestureHandler
-              onHandlerStateChange={() => navigation.navigate("Achiv")}
+              onHandlerStateChange={() => navigation.navigate("Doacoes")}
             >
               <View style={styles.optionOne}>
                 <Image
                   style={styles.optionImage}
-                  source={require("../../assets/images/telas/telaPerfil/conquista.png")}
+                  source={require("../../assets/images/telas/telaPerfil/agenda.png")}
                 />
 
-                <Text style={styles.optionSub}>Conquistas</Text>
+                <Text style={styles.optionSub}>Doações</Text>
               </View>
             </TapGestureHandler>
 

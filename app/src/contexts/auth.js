@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
       const storedUser = await AsyncStorage.getItem("@needy:doador");
       const storedEmail = await AsyncStorage.getItem('@needy:email');
       const storedSenha = await AsyncStorage.getItem('@needy:senha');
+      const storedResponsavel = await AsyncStorage.getItem('@needy:responsavel');
       await AsyncStorage.getItem('@needy:remember').then((value) => {
 
         if (value != null || value != undefined) {
@@ -41,9 +42,11 @@ export const AuthProvider = ({ children }) => {
 
         if (storedUser && (doador != undefined || doador != null)) {
           setUser(JSON.parse(storedUser));
+          setResponsavel(JSON.parse(storedResponsavel));
         } else {
           AsyncStorage.clear().then(() => {
             setUser(null);
+            setResponsavel(null);
           });
         }
       }
