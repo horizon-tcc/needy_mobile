@@ -33,8 +33,14 @@ export default class Loading extends Component {
   }
 
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+
+
+  }
+
+  componentWillMount() {
 
     const pathInterpolate = interpolate(initialPath,
       finalPath, {
@@ -47,10 +53,7 @@ export default class Loading extends Component {
         d: path
       })
     })
-
   }
-
-
 
 
   handlePress = () => {
@@ -76,7 +79,7 @@ export default class Loading extends Component {
 
       }),
 
-      
+
       Animated.delay(500),
       Animated.timing(this.state.animation, {
         toValue: 0,
@@ -93,10 +96,10 @@ export default class Loading extends Component {
 
   render() {
 
-      this.handlePress();
+    this.handlePress();
 
 
-   
+
 
     return (
 

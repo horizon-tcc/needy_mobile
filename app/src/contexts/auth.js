@@ -3,6 +3,7 @@ import { logIn, getUser, getResponsavel } from "../services/api";
 import { AsyncStorage } from "react-native";
 const AuthContext = createContext({});
 import { ToastAndroid } from 'react-native';
+import Loading from '../pages/loading'
 import { value } from "popmotion";
 
 export const AuthProvider = ({ children }) => {
@@ -12,8 +13,9 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = React.useState(false);
   const [emailContext, setEmailContext] = React.useState('');
   const [passwordContext, setPasswordContext] = React.useState('');
+  const [statusDoador, setStatusDoador] = React.useState();
   const [checked, setChecked] = React.useState(false);
-
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     async function loadStoredData() {
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       const storedEmail = await AsyncStorage.getItem('@needy:email');
       const storedSenha = await AsyncStorage.getItem('@needy:senha');
       const storedResponsavel = await AsyncStorage.getItem('@needy:responsavel');
+      const storedStatusDoador = await AsyncStorage.getItem('@needy:statusDoador');
       await AsyncStorage.getItem('@needy:remember').then((value) => {
 
         if (value != null || value != undefined) {
@@ -43,6 +46,8 @@ export const AuthProvider = ({ children }) => {
         if (storedUser && (doador != undefined || doador != null)) {
           setUser(JSON.parse(storedUser));
           setResponsavel(JSON.parse(storedResponsavel));
+          setStatusDoador(JSON.parse(storedStatusDoador));
+          setLoading(false);
         } else {
           AsyncStorage.clear().then(() => {
             setUser(null);
@@ -54,8 +59,12 @@ export const AuthProvider = ({ children }) => {
 
     }
 
+
+
     loadStoredData();
+
   }, []);
+
 
   const validar = async (email, senha) => {
     try {
@@ -96,6 +105,8 @@ export const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem('@needy:remember', JSON.stringify(checked))
 
         setUser(doador);
+        setStatusDoador(doador.statusDoador);
+        await AsyncStorage.setItem("@needy:statusDoador", JSON.stringify(doador.statusDoador));
         setResponsavel(resposavel);
 
       } else {
@@ -115,10 +126,15 @@ export const AuthProvider = ({ children }) => {
   }
 
   const clear = () => {
-    AsyncStorage.multiRemove(['@needy:token', '@needy:doador']).then(() => {
+    AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:statusDoador']).then(() => {
       setUser(null);
+      setStatusDoador(0);
     });
   };
+
+  const setUserStatus = () => {
+    setStatusDoador(0);
+  }
 
   return (
     <AuthContext.Provider
@@ -137,6 +153,8 @@ export const AuthProvider = ({ children }) => {
         setPasswordContext,
         setEmailContext,
         responsavel,
+        statusDoador,
+        setUserStatus,
       }}
     >
       {children}

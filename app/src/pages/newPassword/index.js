@@ -3,9 +3,11 @@ import { View, Text, Stylesheet, StatusBar } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import { colors } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import AuthContext from '../../contexts/auth'
 const newPassword = () => {
     const [newPassword, setNewPassword] = React.useState('');
+    const { setUserStatus } = React.useContext(AuthContext);
+
     return (
         <>
             <StatusBar backgroundColor={'#ca2929'} barStyle={'light-content'} />
@@ -84,7 +86,9 @@ const newPassword = () => {
                         secureTextEntry
                         onChangeText={text => setNewPassword(text)}
                     />
-                    <TouchableOpacity activeOpacity={0.9}>
+                    <TouchableOpacity
+                        onPress={setUserStatus}
+                        activeOpacity={0.9}>
                         <View style={{
                             marginTop: 80,
                             backgroundColor: '#000',

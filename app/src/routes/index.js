@@ -5,9 +5,9 @@ import NewPasswordRoute from './routes.pass';
 import AuthContext from "../contexts/auth";
 
 const Routes = () => {
-  const { signed } = React.useContext(AuthContext);
+  const { signed, statusDoador } = React.useContext(AuthContext);
 
-  return signed ? <InsideRoutes /> : <AuthRoutes />;
+  return signed ? statusDoador === 1 ? <NewPasswordRoute /> : <InsideRoutes /> : <AuthRoutes />;
 };
 
 export default Routes;
