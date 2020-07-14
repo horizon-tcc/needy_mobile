@@ -64,3 +64,27 @@ export const getResponsavel = (token) => {
   });
 };
 
+export const updatePassword = (newPassord, token) => {
+  var doador;
+  return new Promise((resolve, rejection) => {
+    axios({
+      url: "http://needy-api.herokuapp.com/doador",
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        novaSenha: newPassord.toString()
+      }
+    })
+      .then((response) => {
+        doador = response.data;
+        resolve(doador);
+      })
+      .catch((error) => {
+        console.log(error);
+        rejection(error);
+      });
+  })
+}
+

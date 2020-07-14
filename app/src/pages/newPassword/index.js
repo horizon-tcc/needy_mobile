@@ -167,7 +167,13 @@ const newPassword = () => {
                                     </View>
                                 </View>
                                 <TouchableOpacity
-                                    onPress={setUserStatus}
+                                    onPress={() => {
+                                        if (valid === true && equal === true) {
+                                            setUserStatus(confirmPassword)
+                                        } else {
+                                            console.log('verifique os campos')
+                                        }
+                                    }}
                                     activeOpacity={0.9}>
                                     <View style={{
                                         marginTop: 50,

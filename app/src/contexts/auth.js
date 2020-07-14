@@ -1,5 +1,5 @@
 import React, { createContext, useEffect } from "react";
-import { logIn, getUser, getResponsavel } from "../services/api";
+import { logIn, getUser, getResponsavel, updatePassword } from "../services/api";
 import { AsyncStorage } from "react-native";
 const AuthContext = createContext({});
 import { ToastAndroid } from 'react-native';
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
       if (storedToken) {
         const doador = await getUser(storedToken);
-
+        setToken(storedToken);
         if (storedUser && (doador != undefined || doador != null)) {
           setUser(JSON.parse(storedUser));
           setResponsavel(JSON.parse(storedResponsavel));
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
       if (response != null) {
 
         await AsyncStorage.setItem("@needy:token", response);
-
+        setToken(response);
         const doador = await getUser(response);
         const resposavel = await getResponsavel(response);
 
@@ -132,8 +132,20 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
-  const setUserStatus = () => {
-    setStatusDoador(0);
+  const setUserStatus = async (newPassword) => {
+    const doador = await updatePassword(newPassword, token);
+
+    if (doador) {
+      setUser(doador);
+      await AsyncStorage.setItem("@needy:doador", JSON.stringify(doador));
+
+
+      setStatusDoador(doador.statusDoador);
+      await AsyncStorage.setItem("@needy:statusDoador", JSON.stringify(doador.statusDoador));
+
+    } else {
+      console.log('não retornou o doador');
+    }
   }
 
   return (
