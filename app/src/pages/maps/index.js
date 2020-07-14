@@ -4,14 +4,13 @@ import React, { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import styles from "./styles";
 import { View } from "react-native";
-import Markers from "../../components/Markers";
 import * as Location from "expo-location";
 
 const Maps = () => {
 
   useEffect(() => {
-    
-  },[]);
+
+  }, []);
 
   //   const [location, setLocation] = useState({
   //     coords: {
