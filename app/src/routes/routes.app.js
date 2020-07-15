@@ -96,7 +96,7 @@ const InsideRoutes = () => {
         name="Doacoes"
         component={Doacoes}
         options={{
-          title: "Doacoes",
+          title: "Doações",
           animationEnabled: true,
 
           headerShown: true,
