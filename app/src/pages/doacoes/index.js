@@ -73,7 +73,7 @@ const Doacoes = ({ navigation }) => {
 
 												/> : item.statusDoacao == negada ?
 													<Image
-														source={require('../../assets/images/analise-icon.png')}
+														source={require('../../assets/images/negado-icon.png')}
 														style={{
 															width: 80,
 															height: 80,
@@ -98,17 +98,17 @@ const Doacoes = ({ navigation }) => {
 										>Banco de Sangue Santa Marcelina</Text>
 										<Text
 											style={{
-												fontWeight: "500",
-												color: "#c8c8c8"
+												fontWeight: "bold",
+												color: item.statusDoacao === avaliacao ? "#FFE529" : item.statusDoacao === aprovado ? '#69E781' : '#FF0000'
 											}}
 										>Status: {item.statusDoacao === avaliacao ? 'Em avaliação' : item.statusDoacao === aprovado ? 'Aprovada' : item.statusDoacao === negada ? 'Negada' : 'Desconhecido'}</Text>
 										<Text
 											style={{
 												fontSize: 12,
 												fontWeight: "700",
-												color: "#c8c8c8",
+												color: 'rgba(0,0,0,0.9)',
 											}}
-										>ver mais</Text>
+										>{item.statusDoacao != negada ? 'Litros doados: ' + item.totalDoacao : ''}</Text>
 									</View>
 								</View>
 							</TouchableNativeFeedback>
