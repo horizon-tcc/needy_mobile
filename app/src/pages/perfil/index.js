@@ -14,11 +14,13 @@ import axios from "axios";
 import AuthContext from "../../contexts/auth";
 
 const Profile = ({ navigation }) => {
-  const { user } = React.useContext(AuthContext);
+  const { user, lastDonation, donations } = React.useContext(AuthContext);
   const formattedName = user.nomeDoador.split(" ").shift();
-
+  const formattedDayDonation = lastDonation.dataDoacaoFormatted.split('/', 2);
   useEffect(() => {
     console.log(user);
+    console.log(lastDonation);
+
   }, []);
 
   return (
@@ -57,11 +59,11 @@ const Profile = ({ navigation }) => {
 
             <View style={styles.infoContainer}>
               <View style={styles.divLine} />
-              <Text style={styles.value}>10</Text>
+              <Text style={styles.value}>{donations.doacoes.length}</Text>
 
               <Text style={styles.subOne}>Doações Realizadas</Text>
 
-              <Text style={styles.valueTwo}>4,5L</Text>
+              <Text style={styles.valueTwo}>{donations.totalLitrosDoados}L</Text>
 
               <Text style={styles.subTwo}>Litros Doados</Text>
             </View>
@@ -109,9 +111,9 @@ const Profile = ({ navigation }) => {
 
             <View style={styles.dayInfo}>
               <Text style={styles.dateSub}>Data da Última Doação</Text>
-              <Text style={styles.date}> 14 </Text>
+              <Text style={styles.date}> {formattedDayDonation[0]} </Text>
               <View style={styles.divisor} />
-              <Text style={styles.dateMonth}> MAR </Text>
+              <Text style={styles.dateMonth}> {formattedDayDonation[1].toUpperCase()} </Text>
             </View>
           </View>
 

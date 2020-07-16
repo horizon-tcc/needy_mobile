@@ -1,5 +1,5 @@
 import React, { createContext, useEffect } from "react";
-import { logIn, getUser, getResponsavel, updatePassword } from "../services/api";
+import { logIn, getUser, getResponsavel, updatePassword, getDonations } from "../services/api";
 import { AsyncStorage } from "react-native";
 const AuthContext = createContext({});
 import { ToastAndroid } from 'react-native';
@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }) => {
   const [statusDoador, setStatusDoador] = React.useState();
   const [checked, setChecked] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
+  const [lastDonation, setLastDonation] = React.useState(null);
+  const [donations, setDonations] = React.useState(null);
 
   React.useEffect(() => {
     async function loadStoredData() {
@@ -75,7 +77,15 @@ export const AuthProvider = ({ children }) => {
 
         await AsyncStorage.setItem("@needy:token", response);
         setToken(response);
+
         const doador = await getUser(response);
+
+        const donations = await getDonations(token);
+
+
+        setLastDonation(donations.doacoes[0]);
+        setDonations(donations);
+
 
         if (doador.idResponsavel != undefined && doador.idResponsavel != null && doador.idResponsavel !== '') {
           const resposavel = await getResponsavel(response);
@@ -88,7 +98,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-        console.log("DOADOR [auth.js]\n" + doador.idResponsavel);
+        console.log("RESPONSÁVEL DOADOR [auth.js]: " + doador.idResponsavel);
 
         await AsyncStorage.setItem("@needy:doador", JSON.stringify(doador));
 
@@ -117,7 +127,7 @@ export const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem("@needy:statusDoador", JSON.stringify(doador.statusDoador));
 
       } else {
-        console.log("ocorreu um erro");
+        console.log("ocorreu um erro" + error);
         setError(true);
         setTimeout(() => {
           setError(false);
@@ -174,6 +184,8 @@ export const AuthProvider = ({ children }) => {
         responsavel,
         statusDoador,
         setUserStatus,
+        lastDonation,
+        donations,
       }}
     >
       {children}

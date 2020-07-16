@@ -89,3 +89,23 @@ export const updatePassword = (newPassord, token) => {
   })
 }
 
+export const getDonations = (token) => {
+  var vectorDonations;
+  return new Promise((resolve, rejection) => {
+    axios({
+      url: 'http://needy-api.herokuapp.com/doacoes',
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
+      vectorDonations = response.data;
+      resolve(vectorDonations);
+    }).catch((error) => {
+      console.log('deu erro ao pegar doações' + error);
+      rejection(error);
+    })
+  });
+
+}
+
