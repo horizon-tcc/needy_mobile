@@ -27,6 +27,10 @@ export const AuthProvider = ({ children }) => {
       const storedSenha = await AsyncStorage.getItem('@needy:senha');
       const storedResponsavel = await AsyncStorage.getItem('@needy:responsavel');
       const storedStatusDoador = await AsyncStorage.getItem('@needy:statusDoador');
+      const storedDonations = await AsyncStorage.getItem('@needy:donations');
+      const storedLastDonation = await AsyncStorage.getItem('@needy:ultimaDoacao');
+
+      console.log(storedDonations, + '\nULTIMA DOAÇÃO//// ' + storedLastDonation);
       await AsyncStorage.getItem('@needy:remember').then((value) => {
 
         if (value != null || value != undefined) {
@@ -49,6 +53,8 @@ export const AuthProvider = ({ children }) => {
           setUser(JSON.parse(storedUser));
           setResponsavel(JSON.parse(storedResponsavel));
           setStatusDoador(JSON.parse(storedStatusDoador));
+          setDonations(JSON.parse(storedDonations));
+          setLastDonation(JSON.parse(storedLastDonation));
           setLoading(false);
         } else {
           AsyncStorage.clear().then(() => {
@@ -86,6 +92,9 @@ export const AuthProvider = ({ children }) => {
         setLastDonation(donations.doacoes[0]);
         setDonations(donations);
 
+
+        await AsyncStorage.setItem('@needy:donations', JSON.stringify(donations));
+        await AsyncStorage.setItem('@needy:ultimaDoacao', JSON.stringify(donations.doacoes[0]));
 
         if (doador.idResponsavel != undefined && doador.idResponsavel != null && doador.idResponsavel !== '') {
           const resposavel = await getResponsavel(response);
@@ -143,7 +152,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const clear = () => {
-    AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:responsavel', '@needy:statusDoador']).then(() => {
+    AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:responsavel', '@needy:statusDoador', '@needy:donations', '@needy:ultimaDoacao']).then(() => {
       setUser(null);
       setStatusDoador(0);
     });
