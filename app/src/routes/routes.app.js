@@ -15,6 +15,7 @@ import Doacoes from '../pages/doacoes/index';
 import Carteirinha from "../pages/carteirinha";
 import Ajuda from "../pages/ajuda";
 import Termo from "../pages/termos/";
+import InfoBanco from '../pages/infoBanco/';
 
 const Stack = createStackNavigator();
 const NavBar = createBottomTabNavigator();
@@ -121,6 +122,22 @@ const InsideRoutes = () => {
           },
         }}
       />
+
+      <Stack.Screen
+        name="InfoBanco"
+        component={InfoBanco}
+        options={{
+          title: "Informações do Hemocentro",
+          animationEnabled: true,
+
+          headerShown: true,
+          headerTintColor: "#fff",
+          headerStyle: {
+            backgroundColor: "#ca2929",
+          },
+        }}
+      />
+
 
       <Stack.Screen
         name="Carteirinha"
