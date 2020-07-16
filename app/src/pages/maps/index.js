@@ -8,7 +8,7 @@ import * as Location from "expo-location";
 import axios from 'axios';
 import AuthContext from './../../contexts/auth';
 
-const Maps = () => {
+const Maps = ({navigation}) => {
   const {token} = useContext(AuthContext);
   const [bancos, setBancos] = useState([]);
   // State para guardar a latitude e longitude
@@ -77,20 +77,10 @@ const Maps = () => {
       })
     }, [])
 
-// function listarBancos(){
-//   return bancos.map((item) => {
-//     return (
-//       <Marker
-//         coordinate={{
-//           latitude: item.coords.lat,
-//           longitude: item.coords.lng,
-//         }}
-//         title={item.nomeBancoSangue}
-//         image={require('./../../assets/images/marker-banco.png')}
-//       />
-//     );
-//   });
-// }
+    function handleNavigateToInfoBanco(id){
+      navigation.navigate("InfoBanco", {point_id: id});
+      console.log(`Indo para detalhes do Banco`);
+    }
 
   return (
     <View style={styles.container}>
@@ -113,12 +103,17 @@ const Maps = () => {
         />
           {bancos.map(point => (
             <Marker 
-              key={String(point.id)}
+              key={String(point.idBancoSangue)}
               coordinate={{ 
                 latitude: point.coords.lat,
                 longitude: point.coords.lng, 
               }}
+              title={point.nomeBancoSangue}
               image={require("./../../assets/images/marker-banco.png")}
+              onPress={() => {
+                navigation.navigate("InfoBanco", {idBancoSangue: point.idBancoSangue});
+                console.log(point.idBancoSangue);
+              }}
             >
             </Marker>
           ))}
