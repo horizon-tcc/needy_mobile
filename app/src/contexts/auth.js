@@ -76,13 +76,21 @@ export const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem("@needy:token", response);
         setToken(response);
         const doador = await getUser(response);
-        const resposavel = await getResponsavel(response);
 
-        console.log("DOADOR [auth.js]\n" + doador);
-        console.log("RESPONSAVEL [auth.js]\n" + resposavel);
+        if (doador.idResponsavel != undefined && doador.idResponsavel != null && doador.idResponsavel !== '') {
+          const resposavel = await getResponsavel(response);
+          setResponsavel(resposavel);
+          await AsyncStorage.setItem("@needy:responsavel", JSON.stringify(responsavel));
+
+        } else {
+          setResponsavel(null);
+        }
+
+
+
+        console.log("DOADOR [auth.js]\n" + doador.idResponsavel);
 
         await AsyncStorage.setItem("@needy:doador", JSON.stringify(doador));
-        await AsyncStorage.setItem("@needy:responsavel", JSON.stringify(responsavel));
 
         if (checked) {
 
@@ -107,7 +115,6 @@ export const AuthProvider = ({ children }) => {
         setUser(doador);
         setStatusDoador(doador.statusDoador);
         await AsyncStorage.setItem("@needy:statusDoador", JSON.stringify(doador.statusDoador));
-        setResponsavel(resposavel);
 
       } else {
         console.log("ocorreu um erro");
@@ -117,7 +124,7 @@ export const AuthProvider = ({ children }) => {
         }, 1500);
       }
     } catch (error) {
-      console.log(error);
+      console.log('eita deu erro ' + error);
     }
   };
 
@@ -126,7 +133,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   const clear = () => {
-    AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:statusDoador']).then(() => {
+    AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:responsavel', '@needy:statusDoador']).then(() => {
       setUser(null);
       setStatusDoador(0);
     });

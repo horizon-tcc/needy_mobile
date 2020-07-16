@@ -19,7 +19,7 @@ export const logIn = (email, senha) => {
       })
       .catch((error) => {
         resolve(null);
-        reject(error);
+        reject('deu erro ao tentar fazer o login ' + error);
       });
   });
 };
@@ -39,14 +39,14 @@ export const getUser = (token) => {
         resolve(user);
       })
       .catch((error) => {
-        console.log(error);
+        console.log('deu erro no getUser' + error);
       });
   });
 };
 
 export const getResponsavel = (token) => {
   var responsavel;
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     axios({
       url: "http://needy-api.herokuapp.com/responsavel",
       method: "GET",
@@ -59,7 +59,8 @@ export const getResponsavel = (token) => {
         resolve(responsavel);
       })
       .catch((error) => {
-        console.log(error);
+        console.log('deu erro no responsável ' + error);
+        reject(error);
       });
   });
 };
@@ -82,7 +83,7 @@ export const updatePassword = (newPassord, token) => {
         resolve(doador);
       })
       .catch((error) => {
-        console.log(error);
+        console.log('deu erro ao redefinir senha ' + error);
         rejection(error);
       });
   })
