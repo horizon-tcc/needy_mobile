@@ -91,7 +91,7 @@ const Profile = ({ navigation }) => {
               <FontAwesome5 name="info-circle" color={"#ec6262"} size={22} />
             </Tooltip>
             <ProgressCircle
-              percent={73}
+              percent={lastDonation.bloodReloadPercentFormatted.split('%', 2).shift()}
               radius={60}
               borderWidth={10}
               color="#ca2929"
@@ -105,7 +105,7 @@ const Profile = ({ navigation }) => {
                   color: "#ca2929",
                 }}
               >
-                {"73%"}
+                {lastDonation.bloodReloadPercentFormatted}
               </Text>
             </ProgressCircle>
 
