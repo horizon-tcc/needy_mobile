@@ -1,63 +1,123 @@
 import React from "react";
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, Image } from "react-native";
 import styles from "./styles";
+import { TouchableNativeFeedback, FlatList } from "react-native-gesture-handler";
+import AuthContext from '../../contexts/auth';
+
 
 const Doacoes = ({ navigation }) => {
+	const { donations, refreshDonations } = React.useContext(AuthContext);
+	const avaliacao = 1;
+	const aprovado = 2;
+	const negada = 0;
+	console.log(donations.doacoes)
 	return (
-		<ScrollView style={styles.container}>
-			<TouchableOpacity>
-				<View
-					style={{
-						display: "flex",
-						justifyContent: "flex-start",
-						flexDirection: "row",
-						alignItems: "center",
-						padding: 15,
-					}}
-				>
-					<View
-						style={{
-							backgroundColor: "#f4dcdb",
-							padding: 12,
-							borderRadius: 10,
-							marginRight: 10
-						}}
-					>
-						<Image
-							source={require('../../assets/images/sangue.png')}
-						/>
-					</View>
-					<View>
-						<Text
-							style={{
-								fontSize: 20,
-								fontWeight: "700",
-								color: "#8c8c8c",
-							}}
-						>10/07/2020</Text>
-						<Text
-							style={{
-								fontWeight: "700",
-								color: "#c8c8c8"
-							}}
-						>Banco de Sangue Santa Marcelina</Text>
-						<Text
-							style={{
-								fontWeight: "500",
-								color: "#c8c8c8"
-							}}
-						>Status: Em análise</Text>
-						<Text
-							style={{
-								fontSize: 12,
-								fontWeight: "700",
-								color: "#c8c8c8",
-							}}
-						>ver mais</Text>
-					</View>
-				</View>
-			</TouchableOpacity>
-		</ScrollView>
+		<ScrollView style={{
+			backgroundColor: '#fff',
+		}}>
+
+			<FlatList
+				data={donations.doacoes}
+				renderItem={({ item }) => {
+					return (
+						<>
+							<TouchableNativeFeedback>
+								<View
+									style={{
+										display: "flex",
+										justifyContent: "flex-start",
+										flexDirection: "row",
+										alignItems: "center",
+										padding: 15,
+										backgroundColor: '#fff',
+
+
+									}}
+								>
+									<View
+										style={{
+											backgroundColor: "#fff",
+											width: 100,
+											height: 100,
+											borderRadius: 10,
+											marginRight: 10,
+											alignItems: 'center',
+											justifyContent: 'center',
+											shadowColor: "#000",
+											shadowOffset: {
+												width: 0,
+												height: 2,
+											},
+											shadowOpacity: 0.25,
+											shadowRadius: 3.84,
+
+											elevation: 5,
+
+										}}
+									>
+										{item.statusDoacao == aprovado ?
+											<Image
+												source={require('../../assets/images/aprovado-icon.png')}
+												style={{
+													width: 80,
+													height: 80,
+												}}
+
+											/> : item.statusDoacao == avaliacao ?
+												<Image
+													source={require('../../assets/images/analise-icon.png')}
+													style={{
+														width: 80,
+														height: 80,
+													}}
+
+												/> : item.statusDoacao == negada ?
+													<Image
+														source={require('../../assets/images/analise-icon.png')}
+														style={{
+															width: 80,
+															height: 80,
+														}}
+
+													/> : <> </>
+										}
+									</View>
+									<View>
+										<Text
+											style={{
+												fontSize: 20,
+												fontWeight: "700",
+												color: "rgba(0,0,0,0.75)",
+											}}
+										>{item.dataDoacao}</Text>
+										<Text
+											style={{
+												fontWeight: "700",
+												color: "rgba(0,0,0,0.6)"
+											}}
+										>Banco de Sangue Santa Marcelina</Text>
+										<Text
+											style={{
+												fontWeight: "500",
+												color: "#c8c8c8"
+											}}
+										>Status: {item.statusDoacao === avaliacao ? 'Em avaliação' : item.statusDoacao === aprovado ? 'Aprovada' : item.statusDoacao === negada ? 'Negada' : 'Desconhecido'}</Text>
+										<Text
+											style={{
+												fontSize: 12,
+												fontWeight: "700",
+												color: "#c8c8c8",
+											}}
+										>ver mais</Text>
+									</View>
+								</View>
+							</TouchableNativeFeedback>
+						</>
+					)
+				}}>
+			</FlatList>
+
+		</ScrollView >
 	)
 };
 export default Doacoes;

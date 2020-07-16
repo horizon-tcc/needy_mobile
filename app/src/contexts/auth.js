@@ -53,8 +53,11 @@ export const AuthProvider = ({ children }) => {
           setUser(JSON.parse(storedUser));
           setResponsavel(JSON.parse(storedResponsavel));
           setStatusDoador(JSON.parse(storedStatusDoador));
-          setDonations(JSON.parse(storedDonations));
-          setLastDonation(JSON.parse(storedLastDonation));
+          if (storedDonations && storedLastDonation) {
+            setDonations(JSON.parse(storedDonations));
+            setLastDonation(JSON.parse(storedLastDonation));
+
+          };
           setLoading(false);
         } else {
           AsyncStorage.clear().then(() => {
@@ -155,6 +158,9 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.multiRemove(['@needy:token', '@needy:doador', '@needy:responsavel', '@needy:statusDoador', '@needy:donations', '@needy:ultimaDoacao']).then(() => {
       setUser(null);
       setStatusDoador(0);
+      setDonations(null);
+      setLastDonation(null);
+      setToken(null);
     });
   };
 
