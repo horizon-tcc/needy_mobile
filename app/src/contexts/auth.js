@@ -174,6 +174,24 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const refreshDonations = async () => {
+    try {
+
+      const donations = await getDonations(token);
+
+
+      setLastDonation(donations.doacoes[0]);
+      setDonations(donations);
+
+
+      await AsyncStorage.setItem('@needy:donations', JSON.stringify(donations));
+      await AsyncStorage.setItem('@needy:ultimaDoacao', JSON.stringify(donations.doacoes[0]));
+
+    } catch (error) {
+      console.log('deu erro ao dar refresh nas doações!' + error);
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -195,6 +213,7 @@ export const AuthProvider = ({ children }) => {
         setUserStatus,
         lastDonation,
         donations,
+        refreshDonations,
       }}
     >
       {children}

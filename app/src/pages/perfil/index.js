@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, SafeAreaView, Text, Image, AsyncStorage } from "react-native";
+import { View, SafeAreaView, Text, Image, AsyncStorage, RefreshControl } from "react-native";
 import styles from "./styles";
 import {
   TouchableOpacity,
@@ -14,18 +14,31 @@ import axios from "axios";
 import AuthContext from "../../contexts/auth";
 
 const Profile = ({ navigation }) => {
-  const { user, lastDonation, donations } = React.useContext(AuthContext);
+  const { user, lastDonation, donations, refreshDonations } = React.useContext(AuthContext);
   const formattedName = user.nomeDoador.split(" ").shift();
   const formattedDayDonation = lastDonation.dataDoacaoFormatted.split('/', 2);
+
+  const [reloading, setReloading] = React.useState(false);
+
+
   useEffect(() => {
     console.log(user);
     console.log(lastDonation);
 
+
   }, []);
+
+  const handleRefresh = () => {
+    setReloading(true);
+    refreshDonations().then(() => {
+      setReloading(false);
+    })
+  }
+
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl refreshing={reloading} onRefresh={handleRefresh} />}>
         <View style={styles.profileBackground}>
           <Image
             style={styles.profilePic}
