@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, Text, ScrollView, Image, RefreshControl } from "react-native";
 import styles from "./styles";
 import { TouchableNativeFeedback, FlatList } from "react-native-gesture-handler";
 import AuthContext from '../../contexts/auth';
@@ -8,44 +8,33 @@ import axios from 'axios';
 
 const Doacoes = ({ navigation }) => {
 	const { donations, refreshDonations, token } = React.useContext(AuthContext);
+	const [reloading, setReloading] = React.useState(false);
+
 	const avaliacao = 1;
 	const aprovado = 2;
 	const negada = 0;
-	var j = 0;
 	console.log(donations.doacoes)
-	const [nome, setNome] = useState([]);
 
-	React.useEffect(() => {
-		for (let index = 0; index < donations.doacoes.length; index++) {
-			axios({
-				method: "GET",
-				url: `https://needy-api.herokuapp.com/bancos/${donations.doacoes[index].idBancoSangue}`,
-				headers: {
-					Authorization: `Bearer ${token}`,
-				},
-			}).then((response) => {
-				nome.push(response.data.nomeBancoSangue);
-			}).catch((error) => {
-				console.log(`ERRO: ${error}`);
-			});
-
-		}
-
-	}, []);
+	const handleRefresh = () => {
+		setReloading(true);
+		refreshDonations().then(() => {
+			setReloading(false);
+		})
+	}
 
 
-	console.log(nome);
 	return (
 		<ScrollView style={{
 			backgroundColor: '#fff',
-		}}>
+		}}
+			refreshControl={<RefreshControl refreshing={reloading} onRefresh={handleRefresh} />}
+		>
 
 			<FlatList
 				data={donations.doacoes}
 				renderItem={({ item, index }) => {
 
 
-					console.log(j);
 					return (
 						<>
 							<TouchableNativeFeedback>
@@ -123,7 +112,7 @@ const Doacoes = ({ navigation }) => {
 												color: "rgba(0,0,0,0.6)",
 												width: 200,
 											}}
-										>{nome[index]}</Text>
+										>{item.nomeBancoSangue}</Text>
 										<Text
 											style={{
 												fontWeight: "bold",
@@ -136,7 +125,7 @@ const Doacoes = ({ navigation }) => {
 												fontWeight: "700",
 												color: 'rgba(0,0,0,0.9)',
 											}}
-										>{item.statusDoacao != negada ? 'Litros doados: ' + item.totalDoacao : ''}</Text>
+										>{item.statusDoacao != negada ? 'Litros doados: ' + item.totalDoacao + 'L' : ''}</Text>
 									</View>
 								</View>
 							</TouchableNativeFeedback>

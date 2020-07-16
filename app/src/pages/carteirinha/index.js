@@ -288,7 +288,7 @@ const carteirinha = () => {
                         fontSize: 26,
                         marginBottom: 10,
 
-                      }}>CPF: </Text>
+                      }}>Nome do Responsável: </Text>
 
                       <Text style={{
                         color: 'rgba(0,0,0,0.8)',
