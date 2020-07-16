@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import styles from "./styles";
 import { TouchableNativeFeedback, FlatList } from "react-native-gesture-handler";
 import AuthContext from '../../contexts/auth';
+import axios from 'axios';
 
 
 const Doacoes = ({ navigation }) => {
-	const { donations, refreshDonations } = React.useContext(AuthContext);
+	const { donations, refreshDonations, token } = React.useContext(AuthContext);
 	const avaliacao = 1;
 	const aprovado = 2;
 	const negada = 0;
+	var j = 0;
 	console.log(donations.doacoes)
+	const [nome, setNome] = useState([]);
+
+	React.useEffect(() => {
+		for (let index = 0; index < donations.doacoes.length; index++) {
+			axios({
+				method: "GET",
+				url: `https://needy-api.herokuapp.com/bancos/${donations.doacoes[index].idBancoSangue}`,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}).then((response) => {
+				nome.push(response.data.nomeBancoSangue);
+			}).catch((error) => {
+				console.log(`ERRO: ${error}`);
+			});
+
+		}
+
+	}, []);
+
+
+	console.log(nome);
 	return (
 		<ScrollView style={{
 			backgroundColor: '#fff',
@@ -18,7 +42,10 @@ const Doacoes = ({ navigation }) => {
 
 			<FlatList
 				data={donations.doacoes}
-				renderItem={({ item }) => {
+				renderItem={({ item, index }) => {
+
+
+					console.log(j);
 					return (
 						<>
 							<TouchableNativeFeedback>
@@ -93,9 +120,10 @@ const Doacoes = ({ navigation }) => {
 										<Text
 											style={{
 												fontWeight: "700",
-												color: "rgba(0,0,0,0.6)"
+												color: "rgba(0,0,0,0.6)",
+												width: 200,
 											}}
-										>Banco de Sangue Santa Marcelina</Text>
+										>{nome[index]}</Text>
 										<Text
 											style={{
 												fontWeight: "bold",

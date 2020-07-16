@@ -8,8 +8,8 @@ const InfoBanco = ({ navigation, route }) => {
 
     const { token } = useContext(AuthContext);
     const { idBancoSangue } = route.params;
-    const {width, height} = Dimensions.get('window');
-    
+    const { width, height } = Dimensions.get('window');
+
     const [nome, setNome] = useState("");
     const [logradouro, setLogradouro] = useState("");
     const [bairro, setBairro] = useState("");
@@ -77,6 +77,7 @@ const InfoBanco = ({ navigation, route }) => {
             <View
                 style={{
                     padding: 20,
+                    backgroundColor: '#fff',
                 }}
             >
                 <View
@@ -99,11 +100,11 @@ const InfoBanco = ({ navigation, route }) => {
                     </Text>
                     {complemento !== '' ? (
                         <Text>
-                        {`${complemento}.`}
+                            {`${complemento}.`}
                         </Text>
                     ) : (
-                        null
-                    )}
+                            null
+                        )}
                     <Text>
                         {`${cep}`}
                     </Text>
@@ -151,7 +152,7 @@ const InfoBanco = ({ navigation, route }) => {
                     >
                         <FlatList
                             horizontal
-                            renderItem={({item}) => (
+                            renderItem={({ item }) => (
                                 <View
                                     style={{
                                         borderRadius: 10,
@@ -162,9 +163,9 @@ const InfoBanco = ({ navigation, route }) => {
                                         marginRight: 15,
                                     }}
                                 >
-                                    <Text style={{color: "#fff", fontWeight: "700"}}>{item.descricaoDiaSemana}</Text>
-                                    <Text style={{color: "#fff"}}>Abre: {item.horarioAbertura}</Text>
-                                    <Text style={{color: "#fff"}}>Fecha: {item.horarioFechamento}</Text>
+                                    <Text style={{ color: "#fff", fontWeight: "700" }}>{item.descricaoDiaSemana}</Text>
+                                    <Text style={{ color: "#fff" }}>Abre: {item.horarioAbertura}</Text>
+                                    <Text style={{ color: "#fff" }}>Fecha: {item.horarioFechamento}</Text>
                                 </View>
                             )}
                             data={horario}
@@ -197,7 +198,7 @@ const InfoBanco = ({ navigation, route }) => {
                             longitude: longitude,
                             latitudeDelta: 0.0014,
                             longitudeDelta: 0.0014,
-                          }}
+                        }}
                     >
                         <Marker
                             coordinate={{

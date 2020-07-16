@@ -10,7 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 const { width, height } = Dimensions.get("screen");
 
 const carteirinha = () => {
-  const { user } = React.useContext(AuthContext);
+  const { user, responsavel } = React.useContext(AuthContext);
 
   var card = React.createRef();
   return (
@@ -229,7 +229,78 @@ const carteirinha = () => {
               activeOpacity={0.9}
               onLongPress={() => card.tip()}
               onPress={() => card.flip()}
-              style={styles.cardContainer}></TouchableOpacity>
+              style={styles.cardContainer}>
+              <Text style={{
+                color: '#fff',
+                marginTop: 40,
+                fontSize: 23,
+                fontWeight: 'bold',
+              }}>Informações Adicionais</Text>
+
+              <View style={{
+                backgroundColor: '#fff',
+                width: '100%',
+                marginTop: 50,
+                flex: 1,
+                borderBottomLeftRadius: 40,
+                borderBottomRightRadius: 40,
+                padding: 20,
+                paddingTop: 40,
+              }}>
+                <View>
+                  <Text style={{
+                    color: '#CA2929',
+                    fontWeight: 'bold',
+                    fontSize: 26,
+                    marginBottom: 10,
+
+                  }}>RG: </Text>
+
+                  <Text style={{
+                    color: 'rgba(0,0,0,0.8)',
+                    fontWeight: 'bold',
+                    fontSize: 22,
+                    marginBottom: 30,
+
+                  }}>{user.rgDoador}</Text>
+
+
+                  <Text style={{
+                    color: '#CA2929',
+                    fontWeight: 'bold',
+                    fontSize: 26,
+                    marginBottom: 10,
+
+                  }}>CPF: </Text>
+
+                  <Text style={{
+                    color: 'rgba(0,0,0,0.8)',
+                    fontWeight: 'bold',
+                    fontSize: 22,
+
+                  }}>{user.cpfDoador}</Text>
+
+                  {responsavel != null ?
+                    <>
+                      <Text style={{
+                        color: '#CA2929',
+                        fontWeight: 'bold',
+                        fontSize: 26,
+                        marginBottom: 10,
+
+                      }}>CPF: </Text>
+
+                      <Text style={{
+                        color: 'rgba(0,0,0,0.8)',
+                        fontWeight: 'bold',
+                        fontSize: 22,
+
+                      }}>responsavel.nomeResponsavel</Text></> : <></>}
+                </View>
+
+              </View>
+
+            </TouchableOpacity>
           </CardFlip>
 
 
