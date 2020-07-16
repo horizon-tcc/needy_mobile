@@ -4,17 +4,17 @@ import { View, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 import AuthContext from '../../contexts/auth';
 
-const InfoBanco = ({ navigation, routes }) => {
+const InfoBanco = ({ navigation, route }) => {
 
     const { token } = useContext(AuthContext);
-    const routeParams = routes.params;
+    const routeParams = route.params;
 
     useEffect(() => {
         axios({
             method: "GET",
             url: `https://needy-api.herokuapp.com/bancos/${routeParams.id}`,
             headers: {
-              Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
         }).then((response) => {
             console.log(`
