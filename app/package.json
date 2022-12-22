@@ -21,7 +21,7 @@
     "expo-image-picker": "~8.0.1",
     "expo-location": "^8.1.0",
     "flubber": "^0.4.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "popmotion": "^8.7.1",
     "prop-types": "^15.7.2",
     "react": "~16.9.0",
